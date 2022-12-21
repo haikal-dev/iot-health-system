@@ -272,9 +272,9 @@
           <div class="content-wrapper">
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1 container-p-y" id="app">
               <div class="row">
-                
+                <main-dashboard></main-dashboard>
               </div>
             </div>
             <!-- / Content -->
@@ -324,5 +324,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script src="{{ mix('/js/dashboard.js') }}"></script>
   </body>
 </html>
