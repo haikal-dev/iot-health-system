@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ESP32Controller;
+use App\Http\Controllers\DashboardController as Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,6 @@ use App\Http\Controllers\ESP32Controller;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [Dashboard::class, 'index']);
 
 Route::get('/iot/esp32', [ESP32Controller::class, 'index']);
