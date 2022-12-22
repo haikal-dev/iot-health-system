@@ -73,7 +73,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="/" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -273,7 +273,7 @@
 
             <div class="container-xxl flex-grow-1 container-p-y" id="app">
               <div class="row">
-              <div class="col-lg-8 mb-4 order-0">
+                <div class="col-lg-8 mb-4 order-0">
                   <div class="card">
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
@@ -292,6 +292,13 @@
                           />
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <heartbeat-monitor></heartbeat-monitor>
                     </div>
                   </div>
                 </div>
