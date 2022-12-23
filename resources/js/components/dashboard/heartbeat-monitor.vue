@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-        <div v-if="heartbeat.value > 0" class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+        <div v-if="status == 'ready'" class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
             <div class="card-title">
                 <h5 class="mb-2">Heartbeat Sensor Activity</h5>
                 <span class="badge bg-label-warning rounded-pill"><i class="bx bx-time"></i> {{ heartbeat.created_at }}</span>
@@ -16,11 +16,10 @@
                 <h5 class="mb-2">Heartbeat Sensor Activity</h5>
             </div>
             <div class="mt-sm-auto">
-                <p v-if="data_not_null">Initializing...</p>
-                <p v-else>No live record</p>
+                <p v-if="status == 'init'">Initializing...</p>
+                <p v-else-if="status == 'empty'">No live record</p>
             </div>
         </div>
-        <div id="profileReportChart"></div>
     </div>
 </template>
 
@@ -30,7 +29,7 @@ import axios from 'axios';
 export default {
     data(){
         return {
-            data_not_null: true,
+            status: 'init',
             heartbeat: {
                 graph: {
                     status: 'increase',
@@ -51,11 +50,12 @@ export default {
                 axios.get('/v2/fetchHeartbeat')
                 .then((res) => {
                     if(res.data.heartbeat.graph == 0){
-                        this.data_not_null = false;
+                        this.status = 'empty';
                     }
 
                     else {
                         this.heartbeat = res.data.heartbeat;
+                        this.status = 'ready';
                     }
                 })
                 .catch((err) => {

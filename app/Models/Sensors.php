@@ -16,4 +16,17 @@ class Sensors
         $model = new WifiModel();
         return $model;
     }
+
+    public static function reset(){
+        $heartbeat = new HeartBeat();
+        $wifi = new WifiModel();
+
+        if($heartbeat->reset() && $wifi->reset()){
+            return true;
+        }
+
+        else {
+            return false;
+        }
+    }
 }

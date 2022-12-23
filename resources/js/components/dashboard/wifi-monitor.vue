@@ -42,7 +42,7 @@ export default {
             setInterval(() => {
                 axios.get('/v2/wifi')
                 .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     if(res.status == 200){
                         if(!res.data.wifi.ssid){
                             this.network_status = 'empty';

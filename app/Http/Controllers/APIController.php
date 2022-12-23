@@ -24,4 +24,21 @@ class APIController extends Controller
             'wifi' => $data
         ];
     }
+
+    public function resetInfo(Request $request){
+        $data = Sensors::reset();
+
+        if($data){
+            return [
+                'success' => true
+            ];
+        }
+
+        else {
+            return [
+                'success' => false,
+                'response' => 'Cant reset.'
+            ];
+        }
+    }
 }

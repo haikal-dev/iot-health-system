@@ -21,6 +21,10 @@ class HeartBeat
         ]);
     }
 
+    public function reset(){
+        return DB::table($this->table)->delete();
+    }
+
     public function simulate(){
         $data = DB::table($this->table)->orderBy('created_at', 'DESC')->take(2)->get();
         return $this->analysis($data);

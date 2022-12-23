@@ -21,6 +21,10 @@ class WifiModel
         ]);
     }
 
+    public function reset(){
+        return DB::table($this->table)->delete();
+    }
+
     public function get(){
         $data = DB::table($this->table)->orderBy('id', 'desc')->first();
 
