@@ -39,10 +39,10 @@ class ESP32Controller extends Controller
 
             elseif($code == 'CHECK'){
                 if($request->has('hr', 'spo')){
-                    $heartrate = $request->hr;
+                    $hr = $request->hr;
                     $spo = $request->spo;
 
-                    Sensors::heartbeat()->save($request->hr, $request->spo);
+                    Sensors::heartbeat()->save($hr, $spo);
                     TG::message('Heartbeat Rate: ' . $heartrate)->send();
                 }
             }
