@@ -27,6 +27,7 @@ let menu, animate;
     item.addEventListener('click', event => {
       event.preventDefault();
       window.Helpers.toggleCollapsed();
+      // console.log('toggle is collapsed');
     });
   });
 
@@ -46,6 +47,7 @@ let menu, animate;
       // Clear any timers set to timeout
       document.querySelector('.layout-menu-toggle').classList.remove('d-block');
       clearTimeout(timeout);
+      // console.log('mouse has leave');
     };
   };
   if (document.getElementById('layout-menu')) {
