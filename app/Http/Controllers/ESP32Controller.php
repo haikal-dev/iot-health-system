@@ -43,7 +43,7 @@ class ESP32Controller extends Controller
                     $spo = $request->spo;
 
                     Sensors::heartbeat()->save($hr, $spo);
-                    TG::message('Heartbeat Rate: ' . $heartrate)->send();
+                    TG::message('Heartbeat Rate: ' . $hr)->send();
                 }
             }
             
