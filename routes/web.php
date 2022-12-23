@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ESP32Controller;
 use App\Http\Controllers\DashboardController as Dashboard;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\APIController as API;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,7 @@ Route::get('/v2/token/request', [LoginController::class, 'token_request']);
 
 
 Route::get('/iot/esp32', [ESP32Controller::class, 'index']);
+
+Route::prefix('/v2')->group(function(){
+    Route::get('/fetchHeartbeat', [API::class, 'fetchHeartbeat']);
+});

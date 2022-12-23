@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\TelegramController as TG;
+use App\Models\Sensors;
 
 class ESP32Controller extends Controller
 {
@@ -30,6 +31,7 @@ class ESP32Controller extends Controller
                 if($request->has('hr')){
                     $heartrate = $request->hr;
 
+                    Sensors::heartbeat()->save($request->hr);
                     TG::message('Heartbeat Rate: ' . $heartrate)->send();
                 }
             }

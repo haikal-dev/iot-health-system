@@ -39,7 +39,7 @@ export default {
         request_token(){
             axios.get('/v2/token/request')
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if(res.status == 200){
                     this.tokenIsRequest = true;
                 }
@@ -55,7 +55,7 @@ export default {
                     token: this.form.token
                 })
                 .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     if(res.status == 200){
                         if(!res.data.success){
                             alert(res.data.response);
