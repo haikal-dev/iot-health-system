@@ -15,4 +15,13 @@ class APIController extends Controller
             'heartbeat' => $data
         ];
     }
+
+    public function fetchWifi(Request $request){
+        $data = Sensors::wifi()->get();
+
+        return [
+            'success' => true,
+            'wifi' => $data
+        ];
+    }
 }

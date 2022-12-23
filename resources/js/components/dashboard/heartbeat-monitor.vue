@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
         <div v-if="heartbeat.value > 0" class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
             <div class="card-title">
-                <h5 class="text-nowrap mb-2">Heartbeat Sensor Activity</h5>
+                <h5 class="mb-2">Heartbeat Sensor Activity</h5>
                 <span class="badge bg-label-warning rounded-pill"><i class="bx bx-time"></i> {{ heartbeat.created_at }}</span>
             </div>
             <div class="mt-sm-auto">
@@ -13,11 +13,11 @@
         </div>
         <div v-else class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
             <div class="card-title">
-                <h5 class="text-nowrap mb-2">Heartbeat Sensor Activity</h5>
+                <h5 class="mb-2">Heartbeat Sensor Activity</h5>
             </div>
             <div class="mt-sm-auto">
-                <h3 v-if="data_not_null">Initializing...</h3>
-                <h3 v-else>No live record</h3>
+                <p v-if="data_not_null">Initializing...</p>
+                <p v-else>No live record</p>
             </div>
         </div>
         <div id="profileReportChart"></div>

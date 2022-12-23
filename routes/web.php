@@ -20,6 +20,11 @@ use App\Http\Controllers\APIController as API;
 Route::middleware(['isAuth'])->group(function(){
     Route::get('/', [Dashboard::class, 'index']);
     Route::get('/logout', [LoginController::class, 'logout']);
+    
+    Route::prefix('/v2')->group(function(){
+        Route::get('/fetchHeartbeat', [API::class, 'fetchHeartbeat']);
+        Route::get('/wifi', [API::class, 'fetchWifi']);
+    });
 });
 
 Route::get('/login', [LoginController::class, 'index']);
@@ -29,6 +34,3 @@ Route::get('/v2/token/request', [LoginController::class, 'token_request']);
 
 Route::get('/iot/esp32', [ESP32Controller::class, 'index']);
 
-Route::prefix('/v2')->group(function(){
-    Route::get('/fetchHeartbeat', [API::class, 'fetchHeartbeat']);
-});

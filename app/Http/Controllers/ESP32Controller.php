@@ -16,9 +16,19 @@ class ESP32Controller extends Controller
         else {
             $code = $request->code;
             $data = $request->has('data') ? $request->data : '';
+            
 
             if($code == 'WIFI_STATUS'){
-                TG::message("Device has been connected to Internet with IP: " . $data)->send();
+                $ip = $request->has('ip') ? $request->ip : '';
+                $ssid = $request->has('ssid') ? $request->ssid : '';
+
+                if($ssid == '' || $ip == ''){
+                    // dont send
+                }
+                else {
+                    Sensors::wifi()->save($ssid, $ip);
+                    TG::message("Device has been connected to Internet with IP: " . $ip)->send();
+                }
             }
 
             elseif($code == 'HEARTBEAT'){
