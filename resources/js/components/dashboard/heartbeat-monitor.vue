@@ -3,7 +3,7 @@
         <div v-if="heartbeat.value > 0" class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
             <div class="card-title">
                 <h5 class="text-nowrap mb-2">Heartbeat Sensor Activity</h5>
-                <span class="badge bg-label-warning rounded-pill">Updated {{ heartbeat.created_at }}</span>
+                <span class="badge bg-label-warning rounded-pill"><i class="bx bx-time"></i> {{ heartbeat.created_at }}</span>
             </div>
             <div class="mt-sm-auto">
                 <small :class="[(heartbeat.graph.status == 'increase' ? 'text-success' : 'text-danger'), 'text-nowrap', 'fw-semibold']">
