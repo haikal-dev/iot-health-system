@@ -12,7 +12,7 @@ class APIController extends Controller
 
         return [
             'success' => true,
-            'heartbeat' => $data
+            'sensors' => $data
         ];
     }
 

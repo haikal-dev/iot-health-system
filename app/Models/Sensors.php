@@ -21,7 +21,9 @@ class Sensors
         $heartbeat = new HeartBeat();
         $wifi = new WifiModel();
 
-        if($heartbeat->reset() || $wifi->reset()){
+        if($heartbeat->reset()){
+            $wifi->reset();
+            
             return true;
         }
 

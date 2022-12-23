@@ -2,18 +2,18 @@
     <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
         <div v-if="status == 'ready'" class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
             <div class="card-title">
-                <h5 class="mb-2">Heartbeat Sensor Activity</h5>
-                <span class="badge bg-label-warning rounded-pill"><i class="bx bx-time"></i> {{ heartbeat.created_at }}</span>
+                <h5 class="mb-2">Sensor Activity</h5>
+                <span class="badge bg-label-warning rounded-pill"><i class="bx bx-time"></i> {{ sensors.created_at }}</span>
             </div>
             <div class="mt-sm-auto">
-                <small :class="[(heartbeat.graph.status == 'increase' ? 'text-success' : 'text-danger'), 'text-nowrap', 'fw-semibold']">
-                    <i :class="['bx', (heartbeat.graph.status == 'increase') ? 'bx-chevron-up' : 'bx-chevron-down']"></i> {{ heartbeat.graph.percent }} %</small>
-                <h3 class="mb-0">{{ heartbeat.value }} bpm</h3>
+                <small class="text-nowrap fw-semibold">
+                    <i class='bx bxs-heart'></i> {{ sensors.spo }} %</small>
+                <h3 class="mb-0"><i class='bx bx-pulse'></i> {{ sensors.hr }} bpm</h3>
             </div>
         </div>
         <div v-else class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
             <div class="card-title">
-                <h5 class="mb-2">Heartbeat Sensor Activity</h5>
+                <h5 class="mb-2">Sensor Activity</h5>
             </div>
             <div class="mt-sm-auto">
                 <p v-if="status == 'init'">Initializing...</p>
@@ -30,13 +30,7 @@ export default {
     data(){
         return {
             status: 'init',
-            heartbeat: {
-                graph: {
-                    status: 'increase',
-                    percentage: '0'
-                },
-                value: 'initialize...'
-            }
+            sensors: []
         }
     },
 
@@ -49,12 +43,12 @@ export default {
             setInterval(() => {
                 axios.get('/v2/fetchHeartbeat')
                 .then((res) => {
-                    if(res.data.heartbeat.graph == 0){
+                    if(!res.data.sensors.id){
                         this.status = 'empty';
                     }
 
                     else {
-                        this.heartbeat = res.data.heartbeat;
+                        this.sensors = res.data.sensors;
                         this.status = 'ready';
                     }
                 })
