@@ -25,6 +25,15 @@ class APIController extends Controller
         ];
     }
 
+    public function fetchTemp(Request $request){
+        $data = Sensors::temperature()->get();
+
+        return [
+            'success' => true,
+            'temp' => $data
+        ];
+    }
+
     public function resetInfo(Request $request){
         $data = Sensors::reset();
 

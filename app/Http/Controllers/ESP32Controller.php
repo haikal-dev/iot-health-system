@@ -37,6 +37,15 @@ class ESP32Controller extends Controller
                 }
             }
 
+            elseif($code == 'TEMP'){
+                if($request->has('temp')){
+                    $temp = $request->temp;
+
+                    Sensors::temperature()->save($temp);
+                    TG::message('Temperature is recorded. Temp: ' . $temp)->send();
+                }
+            }
+
             elseif($code == 'CHECK'){
                 if($request->has('hr', 'spo')){
                     $hr = $request->hr;

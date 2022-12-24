@@ -8,6 +8,8 @@
             <div class="mt-sm-auto">
                 <small class="text-nowrap fw-semibold">
                     <i class='bx bxs-heart'></i> {{ sensors.spo }} %</small>
+                    <br/>
+                <temperature />
                 <h3 class="mb-0"><i class='bx bx-pulse'></i> {{ sensors.hr }} bpm</h3>
             </div>
         </div>
@@ -25,8 +27,12 @@
 
 <script>
 import axios from 'axios';
+import temperature from './temperature.vue';
 
 export default {
+    components: {
+        temperature
+    },
     data(){
         return {
             status: 'init',
