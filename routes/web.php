@@ -26,6 +26,7 @@ Route::middleware(['isAuth'])->group(function(){
         Route::get('/wifi', [API::class, 'fetchWifi']);
         Route::get('/reset', [API::class, 'resetInfo']);
         Route::get('/temp', [API::class, 'fetchTemp']);
+        Route::get('/charts/heartbeat', [API::class, 'fetchHeartbeatChart']);
     });
 });
 

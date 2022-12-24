@@ -16,6 +16,26 @@ class APIController extends Controller
         ];
     }
 
+    public function fetchHeartbeatChart(Request $request){
+        $data = Sensors::charts(Sensors::heartbeat())
+            ->filterize([
+                'sensor_value',
+                'spo_value'
+             ])
+            ->render();
+        
+        $count = 0;
+        foreach($data['sensor_value'] as $k){
+            $data['numbers'][] = $count;
+            $count++;
+        }
+
+        return [
+            'success' => true,
+            'response' => $data
+        ];
+    }
+
     public function fetchWifi(Request $request){
         $data = Sensors::wifi()->get();
 

@@ -22,6 +22,23 @@ class HeartBeat
         ]);
     }
 
+    public function all(){
+        $data = [];
+
+        $model = DB::table($this->table)->select(DB::raw('count(*) as total'))->first();
+
+        if($model->total > 10){
+            $skipped = $model->total - 10;
+            $data = DB::table($this->table)->skip($skipped)->take(10)->get();
+        }
+
+        else {
+            $data = DB::table($this->table)->get();
+        }
+        
+        return $data;
+    }
+
     public function reset(){
         return DB::table($this->table)->delete();
     }

@@ -5,12 +5,18 @@ namespace App\Models;
 use App\Models\HeartBeat;
 use App\Models\WifiModel;
 use App\Models\Temperature;
+use App\Models\Charts;
 
 class Sensors
 {
     public static function heartbeat(){
         $model = new HeartBeat();
         return $model;
+    }
+
+    public static function charts($model){
+        $chart = new Charts($model->all());
+        return $chart;
     }
 
     public static function wifi(){
