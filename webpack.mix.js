@@ -15,3 +15,7 @@ mix.js('resources/js/dashboard.js', 'public/js')
     .js('resources/js/login.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css');
+
+if(mix.inProduction()){
+    mix.version();
+}
