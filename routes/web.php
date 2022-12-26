@@ -5,6 +5,7 @@ use App\Http\Controllers\ESP32Controller;
 use App\Http\Controllers\DashboardController as Dashboard;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\APIController as API;
+use App\Http\Controllers\PatientController as Patient;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,11 @@ use App\Http\Controllers\APIController as API;
 Route::middleware(['isAuth'])->group(function(){
     Route::get('/', [Dashboard::class, 'index']);
     Route::get('/logout', [LoginController::class, 'logout']);
+
+    // Patients
+    Route::prefix('/patients')->group(function(){
+        Route::get('/', [Patient::class, 'index']);
+    });
     
     Route::prefix('/v2')->group(function(){
         Route::get('/fetchHeartbeat', [API::class, 'fetchHeartbeat']);
