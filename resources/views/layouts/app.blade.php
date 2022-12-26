@@ -139,28 +139,17 @@
 
           <div class="menu-inner-shadow"></div>
 
+          
+
           <ul class="menu-inner py-1">
-            <!-- Dashboard -->
-            <li class="menu-item active">
-              <a href="/" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-              </a>
+            @foreach($sidebar as $sb)
+            <li class="menu-item {{ $sb['active'] ? 'active' : '' }}">
+                <a href="{{ $sb['href'] }}" class="menu-link">
+                    <i class="menu-icon tf-icons {{ $sb['icon'] }}"></i>
+                    <div data-i18n="Analytics">{{ $sb['title'] }}</div>
+                </a>
             </li>
-
-            <li class="menu-item">
-              <a href="/patients" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-first-aid"></i>
-                <div data-i18n="Analytics">Patients</div>
-              </a>
-            </li>
-
-            <li class="menu-item">
-              <a href="/logout" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-log-out"></i>
-                <div data-i18n="Analytics">Logout</div>
-              </a>
-            </li>
+            @endforeach
 
             <!-- Layouts -->
             <!-- <li class="menu-item">
