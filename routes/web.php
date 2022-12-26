@@ -23,9 +23,9 @@ Route::middleware(['isAuth'])->group(function(){
     Route::get('/logout', [LoginController::class, 'logout']);
 
     // Patients
-    Route::prefix('/patients')->group(function(){
-        Route::get('/', [Patient::class, 'index']);
-    });
+    // Route::prefix('/patients')->group(function(){
+    //     Route::get('/', [Patient::class, 'index']);
+    // });
     
     Route::prefix('/v2')->group(function(){
         Route::get('/fetchHeartbeat', [API::class, 'fetchHeartbeat']);

@@ -15,12 +15,12 @@ class SidebarController
                 'title' => 'Dashboard',
                 'active' => false
             ],
-            'patients' => [
-                'icon' => 'bx bx-first-aid',
-                'href' => '/patients',
-                'title' => 'Patients',
-                'active' => false
-            ],
+            // 'patients' => [
+            //     'icon' => 'bx bx-first-aid',
+            //     'href' => '/patients',
+            //     'title' => 'Patients',
+            //     'active' => false
+            // ],
             'logout' => [
                 'icon' => 'bx bx-log-out',
                 'href' => '/logout',
