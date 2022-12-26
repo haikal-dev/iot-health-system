@@ -13,12 +13,12 @@
                             class="nav-link active"
                             role="tab"
                             data-bs-toggle="tab"
-                            data-bs-target="#navs-justified-home"
-                            aria-controls="navs-justified-home"
+                            data-bs-target="#navs-patient-list"
+                            aria-controls="navs-patient-list"
                             aria-selected="true"
                           >
                             Informations
-                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger">3</span>
+                            <!-- <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger">3</span> -->
                           </button>
                         </li>
                         <li class="nav-item">
@@ -34,53 +34,13 @@
                             Requests
                           </button>
                         </li>
-                        <li class="nav-item">
-                          <button
-                            type="button"
-                            class="nav-link"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-justified-messages"
-                            aria-controls="navs-justified-messages"
-                            aria-selected="false"
-                          >
-                            Etc.
-                          </button>
-                        </li>
                       </ul>
                       <div class="tab-content">
-                        <div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
-                          <p>
-                            Icing pastry pudding oat cake. Lemon drops cotton candy caramels cake caramels sesame snaps
-                            powder. Bear claw candy topping.
-                          </p>
-                          <p class="mb-0">
-                            Tootsie roll fruitcake cookie. Dessert topping pie. Jujubes wafer carrot cake jelly. Bonbon
-                            jelly-o jelly-o ice cream jelly beans candy canes cake bonbon. Cookie jelly beans marshmallow
-                            jujubes sweet.
-                          </p>
+                        <div class="tab-pane fade show active" id="navs-patient-list" role="tabpanel">
+                          <patient-list></patient-list>
                         </div>
                         <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
-                          <p>
-                            Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
-                            cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
-                            cheesecake fruitcake.
-                          </p>
-                          <p class="mb-0">
-                            Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah
-                            cotton candy liquorice caramels.
-                          </p>
-                        </div>
-                        <div class="tab-pane fade" id="navs-justified-messages" role="tabpanel">
-                          <p>
-                            Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies
-                            cupcake gummi bears cake chocolate.
-                          </p>
-                          <p class="mb-0">
-                            Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet
-                            roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
-                            jelly-o tart brownie jelly.
-                          </p>
+                          <patient-requests></patient-requests>
                         </div>
                       </div>
                     </div>
@@ -104,5 +64,11 @@
               </div>
             </div>
             <!-- / Content -->
+
+@endsection
+
+@section('scripts')
+
+<script src="{{ mix('/js/patients.js') }}"></script>
 
 @endsection

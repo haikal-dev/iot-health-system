@@ -36,6 +36,8 @@ Route::middleware(['isAuth'])->group(function(){
     });
 });
 
+Route::get('/register', [Patient::class, 'register']);
+
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/v2/token/request', [LoginController::class, 'token_request']);

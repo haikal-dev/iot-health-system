@@ -14,4 +14,8 @@ class PatientController extends Controller
         return view('patients.index')
             ->with('sidebar', $sidebar->render());
     }
+
+    public function register(Request $request){
+        return view('patients.register');
+    }
 }
