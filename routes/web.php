@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController as Dashboard;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\APIController as API;
 use App\Http\Controllers\PatientController as Patient;
+use App\Http\Controllers\DeviceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::middleware(['isAuth'])->group(function(){
     Route::prefix('/patients')->group(function(){
         Route::get('/', [Patient::class, 'index']);
     });
+
+    Route::get('/device', [DeviceController::class, 'index']);
     
     Route::prefix('/v2')->group(function(){
         Route::get('/fetchHeartbeat', [API::class, 'fetchHeartbeat']);

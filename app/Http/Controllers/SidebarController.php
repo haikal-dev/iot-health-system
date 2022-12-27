@@ -21,6 +21,12 @@ class SidebarController
                 'title' => 'Patients',
                 'active' => false
             ],
+            'devices' => [
+                'icon' => 'bx bx-chip',
+                'href' => '/device',
+                'title' => 'Devices',
+                'active' => false
+            ],
             'logout' => [
                 'icon' => 'bx bx-log-out',
                 'href' => '/logout',
