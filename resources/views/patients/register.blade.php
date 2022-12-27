@@ -28,7 +28,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Blank layout - Layouts | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Push - Patient Registration Form</title>
 
     <meta name="description" content="" />
 
@@ -68,7 +68,15 @@
     <!-- Content -->
 
     <div class="container" id="app">
-        <h4 class="fw-bold p-4">Blank Page</h4>
+        <div class="row">
+            <div class="offset-md-3 col-md-6">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <patient-registration></patient-registration>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
 

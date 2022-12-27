@@ -21,6 +21,7 @@ window.Vue = require('vue').default;
 
 Vue.component('patient-list', require('./components/patients/lists.vue').default);
 Vue.component('patient-requests', require('./components/patients/requests.vue').default);
+Vue.component('patient-registration', require('./components/patients/register.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
