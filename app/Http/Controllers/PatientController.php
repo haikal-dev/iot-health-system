@@ -23,10 +23,19 @@ class PatientController extends Controller
     public function fetch_approved_lists(Request $request){
         $model = new PatientModel;
 
-        return [
-            'status' => true,
-            'patients' => $model->lists(false)
-        ];
+        if($request->has('data') && $request->data == 'approved'){
+            return [
+                'status' => true,
+                'patients' => $model->lists(true)
+            ];
+        }
+
+        else {
+            return [
+                'status' => true,
+                'patients' => $model->lists(false)
+            ];
+        }
     }
 
     public function create_patient(Request $request){
