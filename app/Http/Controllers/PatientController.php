@@ -20,6 +20,15 @@ class PatientController extends Controller
         return view('patients.register');
     }
 
+    public function fetch_approved_lists(Request $request){
+        $model = new PatientModel;
+
+        return [
+            'status' => true,
+            'patients' => $model->lists(false)
+        ];
+    }
+
     public function create_patient(Request $request){
         $model = new PatientModel(
             $request->name,

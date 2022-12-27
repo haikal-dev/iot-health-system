@@ -52,4 +52,28 @@ class PatientModel
             'registered_at' => $this->registered_at
         ]);
     }
+
+    public function lists($approved = false){
+        $data = [];
+        
+        if($approved){
+            $data = DB::table($this->table)->where('is_approved', '1')->orderBy('registered_at', 'desc')->get();
+        }
+
+        else {
+            $data = DB::table($this->table)->where('is_approved', '0')->orderBy('registered_at', 'desc')->get();
+        }
+
+        return $this->serialize($data);
+    }
+
+    public function serialize($data){
+        $k = [];
+        foreach($data as $arr){
+            $arr->registered_at = gmdate('d/m/Y H:i', $arr->registered_at + (3600*8));
+            $k[] = $arr;
+        }
+
+        return $k;
+    }
 }
