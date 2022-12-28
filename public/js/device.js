@@ -5354,7 +5354,8 @@ __webpack_require__.r(__webpack_exports__);
       device: [],
       dialog_form: {
         patient_id: 0
-      }
+      },
+      patients: []
     };
   },
   created: function created() {
@@ -5381,6 +5382,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().get('/v2/device/id/' + id).then(function (res) {
         // console.log(res);
         if (res.status == 200) {
+          _this2.fetch_patient_lists();
           _this2.device = res.data.device;
           _this2.dialogBox();
         }
@@ -5398,6 +5400,15 @@ __webpack_require__.r(__webpack_exports__);
 
         // console.log(this.device);
       }
+    },
+    fetch_patient_lists: function fetch_patient_lists() {
+      var _this3 = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/v2/patient?data=approved').then(function (res) {
+        // console.log(res);
+        _this3.patients = res.data.patients;
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }
 });
@@ -5543,7 +5554,14 @@ var render = function render() {
     attrs: {
       value: "0"
     }
-  }, [_vm._v("Please select patient to pair with...")])])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Please select patient to pair with...")]), _vm._v(" "), _vm._l(_vm.patients, function (p, i) {
+    return _c("option", {
+      key: i,
+      domProps: {
+        value: p.id
+      }
+    }, [_vm._v(_vm._s(p.name) + " [" + _vm._s(p.ic_no) + "]")]);
+  })], 2)])])]), _vm._v(" "), _c("div", {
     staticClass: "modal-footer"
   }, [_c("button", {
     staticClass: "btn btn-outline-secondary",

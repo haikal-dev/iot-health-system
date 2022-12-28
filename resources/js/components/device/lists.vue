@@ -30,6 +30,7 @@
                                 <label for="nameBasic" class="form-label">Patient</label>
                                 <select class="form-control" v-model="dialog_form.patient_id">
                                     <option value="0">Please select patient to pair with...</option>
+                                    <option v-for="(p, i) in patients" :value="p.id" :key="i">{{ p.name }} [{{ p.ic_no }}]</option>
                                 </select>
                             </div>
                         </div>
@@ -61,7 +62,8 @@ export default {
             device: [],
             dialog_form: {
                 patient_id: 0
-            }
+            },
+            patients: []
         }
     },
 
@@ -92,6 +94,7 @@ export default {
             .then((res) => {
                 // console.log(res);
                 if(res.status == 200){
+                    this.fetch_patient_lists();
                     this.device = res.data.device;
                     this.dialogBox();
                 }
@@ -110,9 +113,20 @@ export default {
                     return;
                 }
 
-                
+
                 // console.log(this.device);
             }
+        },
+
+        fetch_patient_lists(){
+            axios.get('/v2/patient?data=approved')
+            .then((res) => {
+                // console.log(res);
+                this.patients = res.data.patients;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         }
     }
 }
