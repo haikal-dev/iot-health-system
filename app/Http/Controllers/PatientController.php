@@ -26,6 +26,25 @@ class PatientController extends Controller
                     'status' => true
                 ];
             }
+
+            elseif($request->api == 'update'){
+                $model->update($id, [
+                    'name' => $request->name,
+                    'age' => $request->age,
+                    'ic_no' => $request->ic_no,
+                    'hp_no' => $request->hp_no,
+                    'address' => $request->address,
+                    'diabetes' => $request->diabetes,
+                    'hbpressure' => $request->hbpressure,
+                    'asthma' => $request->asthma,
+                    'do_operation' => $request->do_operation,
+                    'other_diseases' => $request->other_diseases
+                ]);
+
+                return [
+                    'status' => true
+                ];
+            }
         }
     }
 

@@ -52,6 +52,20 @@ class PatientModel
             'registered_at' => $this->registered_at
         ]);
     }
+    public function update($id, $data){
+        return DB::table($this->table)->where('id', $id)->update([
+            'name' => $data['name'],
+            'age' => $data['age'],
+            'ic_no' => $data['ic_no'],
+            'hp_no' => $data['hp_no'],
+            'address' => $data['address'],
+            'diabetes' => $data['diabetes'],
+            'hbpressure' => $data['hbpressure'],
+            'asthma' => $data['asthma'],
+            'do_operation' => $data['do_operation'],
+            'other_diseases' => $data['other_diseases']
+        ]);
+    }
 
     public function lists($approved = false){
         $data = [];
