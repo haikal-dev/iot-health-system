@@ -6,6 +6,7 @@
                     <th>ID</th>
                     <th>Patient Name</th>
                     <th>Registered At</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
