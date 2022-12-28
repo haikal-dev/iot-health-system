@@ -19,13 +19,10 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="navs-patient-list" role="tabpanel">
-                    <patient_list
-                        :patients="request_patients" />
+                    <patient_list :patients="request_patients" />
                 </div>
                 <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
-                    <patient_requests
-                        :patients="patients"
-                        v-on:review="(id) => { review_request_patient(id) }" />
+                    <patient_requests :patients="patients" v-on:review="(id) => { review_request_patient(id) }" />
                 </div>
             </div>
         </div>
@@ -34,28 +31,103 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel1">{{ patient.name }}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel1">Patient Informations</h5>
                         <button type="button" class="btn-close" aria-label="Close" @click="dialogBox()"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col mb-3">
+                                <div class="form-group mb-3">
+                                    <label for="">Name</label>
+                                    <input class="form-control" type="text" v-model="patient.name" disabled />
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Identity Card No.</label>
+                                            <input class="form-control" type="number" v-model="patient.ic_no"
+                                                disabled />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Age</label>
+                                            <input class="form-control" type="number" v-model="patient.age" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Mobile No</label>
+                                            <input class="form-control" type="number" v-model="patient.hp_no"
+                                                disabled />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="">Address</label>
+                                    <textarea class="form-control" style="height: 100px;" v-model="patient.address"
+                                        disabled></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Diabetes</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.diabetes" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.diabetes" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">High Blood Pressure</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.hbpressure" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.hbpressure" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Asthma</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.asthma" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.asthma" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Had Operation?</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.do_operation" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.do_operation" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label for="">Other diseases</label>
+                                        <textarea class="form-control" style="height: 100px;" v-model="patient.other_diseases" disabled></textarea>
+                                    </div>
+                                </div>
+
 
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" @click="approve()">Approve</button>
-                        <button type="button" class="btn btn-outline-secondary" @click="dialogBox()">
+                        <!-- <button type="button" class="btn btn-outline-secondary" @click="dialogBox()">
                             Remove
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </template>
 
 <script>
@@ -76,25 +148,25 @@ export default {
         }
     },
 
-    created(){
+    created() {
         this.fetch_patients();
         this.fetch_request_patients();
     },
 
     methods: {
-        fetch_request_patients(){
+        fetch_request_patients() {
             axios.get('/v2/patient?data=approved')
-            .then((res) => {
-                // console.log(res);
-                if(res.status == 200){
-                    if(res.data.status){
-                        this.request_patients = res.data.patients;
+                .then((res) => {
+                    // console.log(res);
+                    if (res.status == 200) {
+                        if (res.data.status) {
+                            this.request_patients = res.data.patients;
+                        }
                     }
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
 
         fetch_patients() {
@@ -135,7 +207,12 @@ export default {
         },
 
         approve() {
-            //
+            let msg = confirm("Are you sure want to approve this patient?");
+
+            if (msg) {
+                console.log('approved');
+                this.dialogBox();
+            }
         }
     }
 }

@@ -5428,7 +5428,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }, _defineProperty(_methods, "dialogBox", function dialogBox() {
     this.dialog = !this.dialog;
   }), _defineProperty(_methods, "approve", function approve() {
-    //
+    var msg = confirm("Are you sure want to approve this patient?");
+    if (msg) {
+      console.log('approved');
+      this.dialogBox();
+    }
   }), _methods)
 });
 
@@ -5690,7 +5694,7 @@ var render = function render() {
     attrs: {
       id: "exampleModalLabel1"
     }
-  }, [_vm._v(_vm._s(_vm.patient.name))]), _vm._v(" "), _c("button", {
+  }, [_vm._v("Patient Informations")]), _vm._v(" "), _c("button", {
     staticClass: "btn-close",
     attrs: {
       type: "button",
@@ -5701,7 +5705,375 @@ var render = function render() {
         return _vm.dialogBox();
       }
     }
-  })]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "modal-body"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col mb-3"
+  }, [_c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Name")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.name,
+      expression: "patient.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      disabled: ""
+    },
+    domProps: {
+      value: _vm.patient.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.patient, "name", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Identity Card No.")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.ic_no,
+      expression: "patient.ic_no"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "number",
+      disabled: ""
+    },
+    domProps: {
+      value: _vm.patient.ic_no
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.patient, "ic_no", $event.target.value);
+      }
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Age")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.age,
+      expression: "patient.age"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "number",
+      disabled: ""
+    },
+    domProps: {
+      value: _vm.patient.age
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.patient, "age", $event.target.value);
+      }
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Mobile No")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.hp_no,
+      expression: "patient.hp_no"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "number",
+      disabled: ""
+    },
+    domProps: {
+      value: _vm.patient.hp_no
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.patient, "hp_no", $event.target.value);
+      }
+    }
+  })])])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Address")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.address,
+      expression: "patient.address"
+    }],
+    staticClass: "form-control",
+    staticStyle: {
+      height: "100px"
+    },
+    attrs: {
+      disabled: ""
+    },
+    domProps: {
+      value: _vm.patient.address
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.patient, "address", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Diabetes")]), _vm._v(" "), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.diabetes,
+      expression: "patient.diabetes"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.patient.diabetes, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.patient, "diabetes", "NO");
+      }
+    }
+  }), _vm._v(" No\n                                        "), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.diabetes,
+      expression: "patient.diabetes"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.patient.diabetes, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.patient, "diabetes", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n                                    ")])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("High Blood Pressure")]), _vm._v(" "), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.hbpressure,
+      expression: "patient.hbpressure"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.patient.hbpressure, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.patient, "hbpressure", "NO");
+      }
+    }
+  }), _vm._v(" No\n                                        "), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.hbpressure,
+      expression: "patient.hbpressure"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.patient.hbpressure, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.patient, "hbpressure", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n                                    ")])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Asthma")]), _vm._v(" "), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.asthma,
+      expression: "patient.asthma"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.patient.asthma, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.patient, "asthma", "NO");
+      }
+    }
+  }), _vm._v(" No\n                                        "), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.asthma,
+      expression: "patient.asthma"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.patient.asthma, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.patient, "asthma", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n                                    ")])])]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Had Operation?")]), _vm._v(" "), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.do_operation,
+      expression: "patient.do_operation"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.patient.do_operation, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.patient, "do_operation", "NO");
+      }
+    }
+  }), _vm._v(" No\n                                        "), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.do_operation,
+      expression: "patient.do_operation"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.patient.do_operation, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.patient, "do_operation", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n                                    ")])]), _vm._v(" "), _c("div", {
+    staticClass: "col"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Other diseases")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.other_diseases,
+      expression: "patient.other_diseases"
+    }],
+    staticClass: "form-control",
+    staticStyle: {
+      height: "100px"
+    },
+    attrs: {
+      disabled: ""
+    },
+    domProps: {
+      value: _vm.patient.other_diseases
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.patient, "other_diseases", $event.target.value);
+      }
+    }
+  })])])])])]), _vm._v(" "), _c("div", {
     staticClass: "modal-footer"
   }, [_c("button", {
     staticClass: "btn btn-primary",
@@ -5713,17 +6085,7 @@ var render = function render() {
         return _vm.approve();
       }
     }
-  }, [_vm._v("Approve")]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-outline-secondary",
-    attrs: {
-      type: "button"
-    },
-    on: {
-      click: function click($event) {
-        return _vm.dialogBox();
-      }
-    }
-  }, [_vm._v("\n                        Remove\n                    ")])])])])]) : _vm._e()]);
+  }, [_vm._v("Approve")])])])])]) : _vm._e()]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -5758,16 +6120,6 @@ var staticRenderFns = [function () {
       "aria-selected": "false"
     }
   }, [_vm._v("\n                    Requests\n                ")])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "modal-body"
-  }, [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col mb-3"
-  })])]);
 }];
 render._withStripped = true;
 
