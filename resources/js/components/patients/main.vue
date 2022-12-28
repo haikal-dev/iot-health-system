@@ -19,10 +19,12 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="navs-patient-list" role="tabpanel">
-                    <patient_list />
+                    <patient_list
+                        :patients="request_patients" />
                 </div>
                 <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
                     <patient_requests
+                        :patients="patients"
                         v-on:review="(id) => { review_request_patient(id) }" />
                 </div>
             </div>
@@ -68,11 +70,48 @@ export default {
     data() {
         return {
             dialog: false,
-            patient: []
+            patient: [],
+            patients: [],
+            request_patients: []
         }
     },
 
+    created(){
+        this.fetch_patients();
+        this.fetch_request_patients();
+    },
+
     methods: {
+        fetch_request_patients(){
+            axios.get('/v2/patient?data=approved')
+            .then((res) => {
+                // console.log(res);
+                if(res.status == 200){
+                    if(res.data.status){
+                        this.request_patients = res.data.patients;
+                    }
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+
+        fetch_patients() {
+            axios.get('/v2/patient')
+                .then((res) => {
+                    // console.log(res);
+                    if (res.status == 200) {
+                        if (res.data.status) {
+                            this.patients = res.data.patients;
+                        }
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+
         dialogBox() {
             this.dialog = !this.dialog;
         },

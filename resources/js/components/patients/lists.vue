@@ -23,6 +23,8 @@
 import approved_lists from './approved_lists.vue';
 
 export default {
+    props: ['patients'],
+    
     components: {
         approved_lists
     },
@@ -33,25 +35,8 @@ export default {
         }
     },
 
-    created() {
-        this.fetch_patients();
-    },
-
     methods: {
-        fetch_patients(){
-            axios.get('/v2/patient?data=approved')
-            .then((res) => {
-                // console.log(res);
-                if(res.status == 200){
-                    if(res.data.status){
-                        this.patients = res.data.patients;
-                    }
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        }
+        //
     }
 }
 </script>

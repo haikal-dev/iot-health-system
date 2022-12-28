@@ -5333,6 +5333,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _approved_lists_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./approved_lists.vue */ "./resources/js/components/patients/approved_lists.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['patients'],
   components: {
     approved_lists: _approved_lists_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -5341,23 +5342,8 @@ __webpack_require__.r(__webpack_exports__);
       patients: []
     };
   },
-  created: function created() {
-    this.fetch_patients();
-  },
   methods: {
-    fetch_patients: function fetch_patients() {
-      var _this = this;
-      axios.get('/v2/patient?data=approved').then(function (res) {
-        // console.log(res);
-        if (res.status == 200) {
-          if (res.data.status) {
-            _this.patients = res.data.patients;
-          }
-        }
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
+    //
   }
 });
 
@@ -5388,20 +5374,52 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       dialog: false,
-      patient: []
+      patient: [],
+      patients: [],
+      request_patients: []
     };
   },
+  created: function created() {
+    this.fetch_patients();
+    this.fetch_request_patients();
+  },
   methods: (_methods = {
+    fetch_request_patients: function fetch_request_patients() {
+      var _this = this;
+      axios.get('/v2/patient?data=approved').then(function (res) {
+        // console.log(res);
+        if (res.status == 200) {
+          if (res.data.status) {
+            _this.request_patients = res.data.patients;
+          }
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    fetch_patients: function fetch_patients() {
+      var _this2 = this;
+      axios.get('/v2/patient').then(function (res) {
+        // console.log(res);
+        if (res.status == 200) {
+          if (res.data.status) {
+            _this2.patients = res.data.patients;
+          }
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
     dialogBox: function dialogBox() {
       this.dialog = !this.dialog;
     },
     review_request_patient: function review_request_patient(id) {
-      var _this = this;
+      var _this3 = this;
       axios.get('/v2/patient/id/' + id).then(function (res) {
         // console.log(res);
         if (res.data.status) {
-          _this.patient = res.data.patient;
-          _this.dialogBox();
+          _this3.patient = res.data.patient;
+          _this3.dialogBox();
         }
       })["catch"](function (err) {
         console.log(err);
@@ -5525,31 +5543,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['patients'],
   components: {
     requests_lists: _requests_lists_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
-      patients: []
+      // patients: [],
     };
   },
-  created: function created() {
-    this.fetch_patients();
-  },
   methods: {
-    fetch_patients: function fetch_patients() {
-      var _this = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/v2/patient').then(function (res) {
-        // console.log(res);
-        if (res.status == 200) {
-          if (res.data.status) {
-            _this.patients = res.data.patients;
-          }
-        }
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
+    //
   }
 });
 
@@ -5642,13 +5646,20 @@ var render = function render() {
       id: "navs-patient-list",
       role: "tabpanel"
     }
-  }, [_c("patient_list")], 1), _vm._v(" "), _c("div", {
+  }, [_c("patient_list", {
+    attrs: {
+      patients: _vm.request_patients
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "tab-pane fade",
     attrs: {
       id: "navs-justified-profile",
       role: "tabpanel"
     }
   }, [_c("patient_requests", {
+    attrs: {
+      patients: _vm.patients
+    },
     on: {
       review: function review(id) {
         _vm.review_request_patient(id);
