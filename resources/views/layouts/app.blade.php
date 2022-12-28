@@ -290,7 +290,7 @@
           <div class="content-wrapper">
             <!-- Content -->
 
-            @yield('content');
+            @yield('content')
 
             <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">

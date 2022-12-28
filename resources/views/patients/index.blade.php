@@ -6,6 +6,7 @@
               <div class="row">
                 <div class="col-lg-12 mb-4 order-0">
                   <main-patient></main-patient>
+                </div>
               </div>
             </div>
             <!-- / Content -->
