@@ -5339,7 +5339,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      patients: []
+      // patients: []
     };
   },
   methods: {
@@ -5360,16 +5360,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _lists_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lists.vue */ "./resources/js/components/patients/lists.vue");
-/* harmony import */ var _requests_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./requests.vue */ "./resources/js/components/patients/requests.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lists_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lists.vue */ "./resources/js/components/patients/lists.vue");
+/* harmony import */ var _requests_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./requests.vue */ "./resources/js/components/patients/requests.vue");
 var _methods;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    patient_list: _lists_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    patient_requests: _requests_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    patient_list: _lists_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    patient_requests: _requests_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -5386,7 +5389,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: (_methods = {
     fetch_request_patients: function fetch_request_patients() {
       var _this = this;
-      axios.get('/v2/patient?data=approved').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/v2/patient?data=approved').then(function (res) {
         // console.log(res);
         if (res.status == 200) {
           if (res.data.status) {
@@ -5399,7 +5402,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     fetch_patients: function fetch_patients() {
       var _this2 = this;
-      axios.get('/v2/patient').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/v2/patient').then(function (res) {
         // console.log(res);
         if (res.status == 200) {
           if (res.data.status) {
@@ -5415,7 +5418,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     review_request_patient: function review_request_patient(id) {
       var _this3 = this;
-      axios.get('/v2/patient/id/' + id).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/v2/patient/id/' + id).then(function (res) {
         // console.log(res);
         if (res.data.status) {
           _this3.patient = res.data.patient;
@@ -5428,10 +5431,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }, _defineProperty(_methods, "dialogBox", function dialogBox() {
     this.dialog = !this.dialog;
   }), _defineProperty(_methods, "approve", function approve() {
+    var _this4 = this;
     var msg = confirm("Are you sure want to approve this patient?");
     if (msg) {
-      console.log('approved');
-      this.dialogBox();
+      // console.log('approved');
+      axios__WEBPACK_IMPORTED_MODULE_0___default().put('/v2/patient/id/' + this.patient.id, {
+        api: 'approve'
+      }).then(function (res) {
+        if (res.data.status) {
+          // console.log(res);
+          _this4.fetch_patients();
+          _this4.fetch_request_patients();
+          _this4.dialogBox();
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }), _methods)
 });

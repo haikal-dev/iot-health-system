@@ -67,6 +67,12 @@ class PatientModel
         return $this->serialize($data);
     }
 
+    public function approve_patient($id){
+        return DB::table($this->table)->where('id', $id)->update([
+            'is_approved' => 1
+        ]);
+    }
+
     public function get_one($id){
         return DB::table($this->table)->where('id', $id)->first();
     }

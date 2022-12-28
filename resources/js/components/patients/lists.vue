@@ -24,14 +24,14 @@ import approved_lists from './approved_lists.vue';
 
 export default {
     props: ['patients'],
-    
+
     components: {
         approved_lists
     },
 
     data(){
         return {
-            patients: []
+            // patients: []
         }
     },
 

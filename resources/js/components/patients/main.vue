@@ -131,6 +131,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import patient_list from './lists.vue';
 import patient_requests from './requests.vue';
 
@@ -210,8 +211,22 @@ export default {
             let msg = confirm("Are you sure want to approve this patient?");
 
             if (msg) {
-                console.log('approved');
-                this.dialogBox();
+                // console.log('approved');
+                axios.put('/v2/patient/id/' + this.patient.id, {
+                    api: 'approve'
+                })
+                .then((res) => {
+                    if(res.data.status){
+                        // console.log(res);
+                        this.fetch_patients();
+                        this.fetch_request_patients();
+                        this.dialogBox();
+                    }
+                    
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
             }
         }
     }

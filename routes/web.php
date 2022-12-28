@@ -40,6 +40,7 @@ Route::middleware(['isAuth'])->group(function(){
         Route::prefix('/patient')->group(function(){
             Route::get('/', [Patient::class, 'fetch_approved_lists']);
             Route::get('/id/{id}', [Patient::class, 'fetch_patient_id']);
+            Route::put('/id/{id}', [Patient::class, 'update']);
         });
 
         Route::prefix('/device')->group(function(){

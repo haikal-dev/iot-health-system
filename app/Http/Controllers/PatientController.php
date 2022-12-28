@@ -16,6 +16,19 @@ class PatientController extends Controller
             ->with('sidebar', $sidebar->render());
     }
 
+    public function update(Request $request, $id){
+        $model = new PatientModel;
+
+        if($request->has('api')){
+            if($request->api == 'approve'){
+                $model->approve_patient($id);
+                return [
+                    'status' => true
+                ];
+            }
+        }
+    }
+
     public function fetch_patient_id(Request $request, $id){
         $model = new PatientModel;
 
