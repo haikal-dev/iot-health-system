@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="nav-align-top mb-4">
+        <div v-if="page == 'index'" class="nav-align-top mb-4">
             <ul class="nav nav-tabs nav-fill" role="tablist">
                 <li class="nav-item">
                     <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
@@ -19,13 +19,16 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="navs-patient-list" role="tabpanel">
-                    <patient_list :patients="request_patients" />
+                    <patient_list :patients="request_patients" v-on:patient_info="(id) => { patient_info(id) }" />
                 </div>
                 <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
                     <patient_requests :patients="patients" v-on:review="(id) => { review_request_patient(id) }" />
                 </div>
             </div>
         </div>
+        
+        <PatientDashboard v-else-if="page == 'patientDashboard'" :id="patient_dashboard.id" />
+
         <div v-if="dialog" class="modal fade show" tabindex="-1" aria-hidden="false" style="display: block;"
             aria-modal="true" role="dialog">
             <div class="modal-dialog" role="document">
@@ -134,10 +137,13 @@
 import axios from 'axios';
 import patient_list from './lists.vue';
 import patient_requests from './requests.vue';
+import PatientDashboard from './patient_dashboard.vue';
 
 export default {
     components: {
-        patient_list, patient_requests
+        patient_list, 
+        patient_requests,
+        PatientDashboard
     },
 
     data() {
@@ -145,7 +151,11 @@ export default {
             dialog: false,
             patient: [],
             patients: [],
-            request_patients: []
+            request_patients: [],
+            page: 'index',
+            patient_dashboard: {
+                id: ''
+            }
         }
     },
 
@@ -168,6 +178,11 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+
+        patient_info(id){
+            this.patient_dashboard.id = id;
+            this.page = 'patientDashboard';
         },
 
         fetch_patients() {

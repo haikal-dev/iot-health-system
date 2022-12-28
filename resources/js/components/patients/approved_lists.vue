@@ -17,7 +17,7 @@ export default {
 
     methods: {
         info(){
-            window.location = '/patients/id/' + this.patient.id;
+            this.$emit('patient_info', this.patient.id);
         }
     }
 }

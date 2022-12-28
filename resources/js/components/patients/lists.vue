@@ -14,7 +14,8 @@
                     v-for="(patient, index) in patients"
                     :patient="patient"
                     :key="index"
-                    :id="index+1" />
+                    :id="index+1"
+                    v-on:patient_info="(id) => { $emit('patient_info', id) }" />
             </tbody>
         </table>
     </div>

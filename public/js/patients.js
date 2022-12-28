@@ -5317,7 +5317,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['patient', 'id'],
   methods: {
     info: function info() {
-      window.location = '/patients/id/' + this.patient.id;
+      this.$emit('patient_info', this.patient.id);
     }
   }
 });
@@ -5369,22 +5369,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lists_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lists.vue */ "./resources/js/components/patients/lists.vue");
 /* harmony import */ var _requests_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./requests.vue */ "./resources/js/components/patients/requests.vue");
+/* harmony import */ var _patient_dashboard_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./patient_dashboard.vue */ "./resources/js/components/patients/patient_dashboard.vue");
 var _methods;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     patient_list: _lists_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    patient_requests: _requests_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    patient_requests: _requests_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    PatientDashboard: _patient_dashboard_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
       dialog: false,
       patient: [],
       patients: [],
-      request_patients: []
+      request_patients: [],
+      page: 'index',
+      patient_dashboard: {
+        id: ''
+      }
     };
   },
   created: function created() {
@@ -5404,6 +5411,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    patient_info: function patient_info(id) {
+      this.patient_dashboard.id = id;
+      this.page = 'patientDashboard';
     },
     fetch_patients: function fetch_patients() {
       var _this2 = this;
@@ -5454,6 +5465,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   }), _methods)
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patients/patient_dashboard.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patients/patient_dashboard.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['id'],
+  data: function data() {
+    return {
+      //
+    };
+  },
+  created: function created() {
+    console.log(this.id);
+  }
 });
 
 /***/ }),
@@ -5643,6 +5679,11 @@ var render = function render() {
       attrs: {
         patient: patient,
         id: index + 1
+      },
+      on: {
+        patient_info: function patient_info(id) {
+          _vm.$emit("patient_info", id);
+        }
       }
     });
   }), 1)])]);
@@ -5672,7 +5713,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("div", {
+  return _c("div", [_vm.page == "index" ? _c("div", {
     staticClass: "nav-align-top mb-4"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "tab-content"
@@ -5685,6 +5726,11 @@ var render = function render() {
   }, [_c("patient_list", {
     attrs: {
       patients: _vm.request_patients
+    },
+    on: {
+      patient_info: function patient_info(id) {
+        _vm.patient_info(id);
+      }
     }
   })], 1), _vm._v(" "), _c("div", {
     staticClass: "tab-pane fade",
@@ -5701,7 +5747,11 @@ var render = function render() {
         _vm.review_request_patient(id);
       }
     }
-  })], 1)])]), _vm._v(" "), _vm.dialog ? _c("div", {
+  })], 1)])]) : _vm.page == "patientDashboard" ? _c("PatientDashboard", {
+    attrs: {
+      id: _vm.patient_dashboard.id
+    }
+  }) : _vm._e(), _vm._v(" "), _vm.dialog ? _c("div", {
     staticClass: "modal fade show",
     staticStyle: {
       display: "block"
@@ -6117,7 +6167,7 @@ var render = function render() {
         return _vm.approve();
       }
     }
-  }, [_vm._v("Approve")])])])])]) : _vm._e()]);
+  }, [_vm._v("Approve")])])])])]) : _vm._e()], 1);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -6153,6 +6203,29 @@ var staticRenderFns = [function () {
     }
   }, [_vm._v("\n                    Requests\n                ")])])]);
 }];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patients/patient_dashboard.vue?vue&type=template&id=66764624&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patients/patient_dashboard.vue?vue&type=template&id=66764624& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", [_vm._v("Patient Dashboard")]);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -29422,6 +29495,45 @@ component.options.__file = "resources/js/components/patients/main.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/patients/patient_dashboard.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/patients/patient_dashboard.vue ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _patient_dashboard_vue_vue_type_template_id_66764624___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./patient_dashboard.vue?vue&type=template&id=66764624& */ "./resources/js/components/patients/patient_dashboard.vue?vue&type=template&id=66764624&");
+/* harmony import */ var _patient_dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./patient_dashboard.vue?vue&type=script&lang=js& */ "./resources/js/components/patients/patient_dashboard.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _patient_dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _patient_dashboard_vue_vue_type_template_id_66764624___WEBPACK_IMPORTED_MODULE_0__.render,
+  _patient_dashboard_vue_vue_type_template_id_66764624___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/patients/patient_dashboard.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/patients/register.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/patients/register.vue ***!
@@ -29587,6 +29699,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/patients/patient_dashboard.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/patients/patient_dashboard.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_patient_dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./patient_dashboard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patients/patient_dashboard.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_patient_dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/patients/register.vue?vue&type=script&lang=js&":
 /*!********************************************************************************!*\
   !*** ./resources/js/components/patients/register.vue?vue&type=script&lang=js& ***!
@@ -29682,6 +29810,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_main_vue_vue_type_template_id_0ed59042___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_main_vue_vue_type_template_id_0ed59042___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./main.vue?vue&type=template&id=0ed59042& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patients/main.vue?vue&type=template&id=0ed59042&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/patients/patient_dashboard.vue?vue&type=template&id=66764624&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/patients/patient_dashboard.vue?vue&type=template&id=66764624& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_patient_dashboard_vue_vue_type_template_id_66764624___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_patient_dashboard_vue_vue_type_template_id_66764624___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_patient_dashboard_vue_vue_type_template_id_66764624___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./patient_dashboard.vue?vue&type=template&id=66764624& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/patients/patient_dashboard.vue?vue&type=template&id=66764624&");
 
 
 /***/ }),
