@@ -40,6 +40,11 @@ Route::middleware(['isAuth'])->group(function(){
         Route::prefix('/patient')->group(function(){
             Route::get('/', [Patient::class, 'fetch_approved_lists']);
         });
+
+        Route::prefix('/device')->group(function(){
+            Route::get('/', [DeviceController::class, 'fetch_device_lists']);
+            Route::get('/id/{id}', [DeviceController::class, 'fetch_device_id']);
+        });
     });
 });
 

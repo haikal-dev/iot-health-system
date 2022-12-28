@@ -2,5 +2,6 @@
     "/js/dashboard.js": "/js/dashboard.js",
     "/js/login.js": "/js/login.js",
     "/js/patients.js": "/js/patients.js",
+    "/js/device.js": "/js/device.js",
     "/css/app.css": "/css/app.css"
 }
