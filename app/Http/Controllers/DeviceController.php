@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SidebarController;
 use App\Models\DeviceModel;
+use App\Models\PatientModel;
 
 class DeviceController extends Controller
 {
@@ -15,11 +16,46 @@ class DeviceController extends Controller
             ->with('sidebar', $sidebar->render());
     }
 
+    public function pairing(Request $request, $id){
+        $device = new DeviceModel();
+        
+        if(!$request->has('pairing_id')){
+            return [
+                'status' => false,
+                'response' => 'Invalid pairing ID'
+            ];
+        }
+
+        else {
+            if($request->pairing_id == ''){
+                $device->reset_pairing($id);
+            }
+
+            else {
+                $device->pairing($id, $request->pairing_id);
+            }
+
+            return [
+                'status' => true
+            ];
+        }
+    }
+
     public function fetch_device_lists(Request $request){
         $device = new DeviceModel();
+        $patient = new PatientModel;
+        $device = $device->lists();
+
+        $data = [];
+
+        foreach($device as $dev){
+            $dev->pairing_id = ($dev->pairing_id != '') ? $patient->get_one($dev->pairing_id)->name : '';
+            $dev->last_updated = gmdate('d/m/Y H:i', $dev->last_updated + (3600*8));
+            $data[] = $dev;
+        }
 
         return [
-            'devices' => $device->lists()
+            'devices' => $data
         ];
     }
 

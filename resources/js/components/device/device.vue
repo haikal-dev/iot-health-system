@@ -20,7 +20,7 @@ export default {
         },
 
         unpair(){
-            //
+            this.$emit('unpair', this.device.id);
         }
     }
 }

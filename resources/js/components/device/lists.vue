@@ -13,7 +13,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <device_detail v-for="(device, index) in devices" :device="device" :key="index" :id="index + 1" v-on:pair="(id) => { pair(id) }" />
+                    <device_detail v-for="(device, index) in devices" :device="device" :key="index" :id="index + 1" v-on:pair="(id) => { pair(id) }" v-on:unpair="(id) => { reset_pairing(id) }" />
                 </tbody>
             </table>
         </div>
@@ -104,6 +104,24 @@ export default {
             });
         },
 
+        reset_pairing(id){
+            let msg = confirm("Are you sure want to unpair this device?");
+
+            if(msg){
+                axios.put('/v2/device/id/' + id, {
+                    pairing_id: ''
+                })
+                .then((res) => {
+                    if(res.data.status){
+                        this.fetch_device_lists();
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            }
+        },
+
         start_pairing(){
             var msg = confirm("Are you sure want to pair the device with this patient?");
 
@@ -115,6 +133,18 @@ export default {
 
 
                 // console.log(this.device);
+                axios.put('/v2/device/id/' + this.device.id, {
+                    pairing_id: this.dialog_form.patient_id
+                })
+                .then((res) => {
+                    if(res.data.status){
+                        this.fetch_device_lists();
+                        this.dialogBox();
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
             }
         },
 

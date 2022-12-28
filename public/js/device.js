@@ -5320,7 +5320,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('pair', this.device.id);
     },
     unpair: function unpair() {
-      //
+      this.$emit('unpair', this.device.id);
     }
   }
 });
@@ -5390,7 +5390,24 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
+    reset_pairing: function reset_pairing(id) {
+      var _this3 = this;
+      var msg = confirm("Are you sure want to unpair this device?");
+      if (msg) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().put('/v2/device/id/' + id, {
+          pairing_id: ''
+        }).then(function (res) {
+          console.log(res);
+          if (res.data.status) {
+            _this3.fetch_device_lists();
+          }
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
+    },
     start_pairing: function start_pairing() {
+      var _this4 = this;
       var msg = confirm("Are you sure want to pair the device with this patient?");
       if (msg) {
         if (this.dialog_form.patient_id == 0) {
@@ -5399,13 +5416,24 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         // console.log(this.device);
+        axios__WEBPACK_IMPORTED_MODULE_0___default().put('/v2/device/id/' + this.device.id, {
+          pairing_id: this.dialog_form.patient_id
+        }).then(function (res) {
+          console.log(res);
+          if (res.data.status) {
+            _this4.fetch_device_lists();
+            _this4.dialogBox();
+          }
+        })["catch"](function (err) {
+          console.log(err);
+        });
       }
     },
     fetch_patient_lists: function fetch_patient_lists() {
-      var _this3 = this;
+      var _this5 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get('/v2/patient?data=approved').then(function (res) {
         // console.log(res);
-        _this3.patients = res.data.patients;
+        _this5.patients = res.data.patients;
       })["catch"](function (err) {
         console.log(err);
       });
@@ -5481,6 +5509,9 @@ var render = function render() {
       on: {
         pair: function pair(id) {
           _vm.pair(id);
+        },
+        unpair: function unpair(id) {
+          _vm.reset_pairing(id);
         }
       }
     });

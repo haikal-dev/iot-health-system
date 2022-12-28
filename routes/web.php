@@ -46,6 +46,7 @@ Route::middleware(['isAuth'])->group(function(){
         Route::prefix('/device')->group(function(){
             Route::get('/', [DeviceController::class, 'fetch_device_lists']);
             Route::get('/id/{id}', [DeviceController::class, 'fetch_device_id']);
+            Route::put('/id/{id}', [DeviceController::class, 'pairing']);
         });
     });
 });
