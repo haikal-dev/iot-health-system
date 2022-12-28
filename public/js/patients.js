@@ -5445,7 +5445,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['patient', 'id']
+  props: ['patient', 'id'],
+  methods: {
+    review: function review() {
+      this.$emit('review', this.patient.id);
+    }
+  }
 });
 
 /***/ }),
@@ -5472,7 +5477,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      patients: []
+      patients: [],
+      patient: [],
+      dialog: false
     };
   },
   created: function created() {
@@ -5491,6 +5498,24 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    review: function review(id) {
+      var _this2 = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/v2/patient/id/' + id).then(function (res) {
+        // console.log(res);
+        if (res.data.status) {
+          _this2.patient = res.data.patient;
+          _this2.dialogBox();
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    dialogBox: function dialogBox() {
+      this.dialog = !this.dialog;
+    },
+    approve: function approve() {
+      //
     }
   }
 });
@@ -5963,7 +5988,14 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("tr", [_c("td", [_vm._v(_vm._s(_vm.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm.patient.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm.patient.registered_at))])]);
+  return _c("tr", [_c("td", [_vm._v(_vm._s(_vm.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm.patient.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm.patient.registered_at))]), _vm._v(" "), _c("td", [_c("button", {
+    staticClass: "btn btn-primary",
+    on: {
+      click: function click($event) {
+        return _vm.review();
+      }
+    }
+  }, [_vm._v("Review")])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5986,7 +6018,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c("div", [_c("div", {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table table-striped"
@@ -5996,14 +6028,87 @@ var render = function render() {
       attrs: {
         patient: data,
         id: index + 1
+      },
+      on: {
+        review: function review(id) {
+          _vm.review(id);
+        }
       }
     });
-  }), 1)])]);
+  }), 1)])]), _vm._v(" "), _vm.dialog ? _c("div", {
+    staticClass: "modal fade show",
+    staticStyle: {
+      display: "block"
+    },
+    attrs: {
+      tabindex: "-1",
+      "aria-hidden": "false",
+      "aria-modal": "true",
+      role: "dialog"
+    }
+  }, [_c("div", {
+    staticClass: "modal-dialog",
+    attrs: {
+      role: "document"
+    }
+  }, [_c("div", {
+    staticClass: "modal-content"
+  }, [_c("div", {
+    staticClass: "modal-header"
+  }, [_c("h5", {
+    staticClass: "modal-title",
+    attrs: {
+      id: "exampleModalLabel1"
+    }
+  }, [_vm._v(_vm._s(_vm.patient.name))]), _vm._v(" "), _c("button", {
+    staticClass: "btn-close",
+    attrs: {
+      type: "button",
+      "aria-label": "Close"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.dialogBox();
+      }
+    }
+  })]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+    staticClass: "modal-footer"
+  }, [_c("button", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      type: "button"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.approve();
+      }
+    }
+  }, [_vm._v("Approve")]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-outline-secondary",
+    attrs: {
+      type: "button"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.dialogBox();
+      }
+    }
+  }, [_vm._v("\n                        Remove\n                    ")])])])])]) : _vm._e()]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("thead", [_c("tr", [_c("th", [_vm._v("No")]), _vm._v(" "), _c("th", [_vm._v("Patient Name")]), _vm._v(" "), _c("th", [_vm._v("Requested At")])])]);
+  return _c("thead", [_c("tr", [_c("th", [_vm._v("No")]), _vm._v(" "), _c("th", [_vm._v("Patient Name")]), _vm._v(" "), _c("th", [_vm._v("Requested At")]), _vm._v(" "), _c("th")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "modal-body"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col mb-3"
+  })])]);
 }];
 render._withStripped = true;
 

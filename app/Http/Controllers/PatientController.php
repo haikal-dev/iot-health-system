@@ -16,6 +16,26 @@ class PatientController extends Controller
             ->with('sidebar', $sidebar->render());
     }
 
+    public function fetch_patient_id(Request $request, $id){
+        $model = new PatientModel;
+
+        $result = $model->get_one($id);
+
+        if(!isset($result->id)){
+            return [
+                'status' => false,
+                'response' => 'Patient was not found'
+            ];
+        }
+
+        else {
+            return [
+                'status' => true,
+                'patient' => $result
+            ];
+        }
+    }
+
     public function register(Request $request){
         return view('patients.register');
     }

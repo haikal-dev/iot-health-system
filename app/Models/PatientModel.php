@@ -67,6 +67,10 @@ class PatientModel
         return $this->serialize($data);
     }
 
+    public function get_one($id){
+        return DB::table($this->table)->where('id', $id)->first();
+    }
+
     public function serialize($data){
         $k = [];
         foreach($data as $arr){
