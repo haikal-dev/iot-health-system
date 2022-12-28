@@ -19,8 +19,7 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('patient-list', require('./components/patients/lists.vue').default);
-Vue.component('patient-requests', require('./components/patients/requests.vue').default);
+Vue.component('main-patient', require('./components/patients/main.vue').default);
 Vue.component('patient-registration', require('./components/patients/register.vue').default);
 
 /**
