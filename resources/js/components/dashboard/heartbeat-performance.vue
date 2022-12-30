@@ -91,7 +91,7 @@ export default {
                             type: 'area'
                         },
                         dataLabels: {
-                            enabled: false
+                            enabled: true
                         },
                         stroke: {
                             width: 2,
@@ -150,7 +150,7 @@ export default {
                                 show: false
                             },
                             labels: {
-                                show: false,
+                                show: true,
                                 style: {
                                     fontSize: '13px',
                                     colors: axisColor
@@ -159,7 +159,7 @@ export default {
                         },
                         yaxis: {
                             labels: {
-                                show: false
+                                show: true
                             },
                             min: 10,
                             max: 200,
