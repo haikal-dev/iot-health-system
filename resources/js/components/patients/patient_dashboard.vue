@@ -6,6 +6,7 @@
                     <div class="card-body">
                         <h3><small style="font-size: 0.8rem;">NAME</small><br/>{{ patient.name.toUpperCase() }}</h3>
                         <h3><small style="font-size: 0.8rem;">IDENTITY CARD</small><br/>{{ patient.ic_no }}</h3>
+                        <h3><small style="font-size: 0.8rem;">TELEGRAM ID</small><br/>{{ patient.telegram_id }}</h3>
                     </div>
                 </div>
             </div>
