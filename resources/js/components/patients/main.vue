@@ -27,7 +27,7 @@
             </div>
         </div>
         
-        <PatientDashboard v-else-if="page == 'patientDashboard'" :id="patient_dashboard.id" />
+        <PatientDashboard v-else-if="page == 'patientDashboard'" :id="patient_dashboard.id" v-on:monitor="(id) => { monitor_patient(id) }" />
 
         <div v-if="dialog" class="modal fade show" tabindex="-1" aria-hidden="false" style="display: block;"
             aria-modal="true" role="dialog">
@@ -165,6 +165,10 @@ export default {
     },
 
     methods: {
+        monitor_patient(id){
+            this.page = 'monitor-patient';
+        },
+
         fetch_request_patients() {
             axios.get('/v2/patient?data=approved')
                 .then((res) => {

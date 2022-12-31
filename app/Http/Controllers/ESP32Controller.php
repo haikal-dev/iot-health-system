@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\TelegramController as TG;
 use App\Models\Sensors;
+use App\Models\DeviceModel;
 
 class ESP32Controller extends Controller
 {
@@ -40,6 +41,8 @@ class ESP32Controller extends Controller
             elseif($code == 'TEMP'){
                 if($request->has('temp')){
                     $temp = $request->temp;
+
+                    $device = new DeviceModel();
 
                     Sensors::temperature()->save($temp);
                     TG::message('Temperature is recorded. Temp: ' . $temp)->send();

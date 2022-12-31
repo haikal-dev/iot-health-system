@@ -95,6 +95,7 @@
                         <div class="col mb-3">
                             <div class="col" align="right">
                                 <button v-if="!form_disabled" class="btn btn-primary" @click="save()">Save Changes</button>
+                                <button v-if="form_disabled" class="btn btn-warning" @click="monitor()">Monitor</button>
                                 <button v-if="form_disabled" class="btn btn-primary" @click="enable_edit()">Edit Patient</button>
                                 <button v-else class="btn btn-danger" @click="enable_edit()">
                                     Cancel
@@ -142,6 +143,12 @@ export default {
         enable_edit(){
             if(this.patient.id !== undefined){
                 this.form_disabled = !this.form_disabled;
+            }
+        },
+
+        monitor(){
+            if(this.patient.id !== undefined){
+                this.$emit('monitor', this.patient.id);
             }
         },
 
