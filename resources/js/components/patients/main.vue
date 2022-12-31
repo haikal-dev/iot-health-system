@@ -27,7 +27,10 @@
             </div>
         </div>
         
-        <PatientDashboard v-else-if="page == 'patientDashboard'" :id="patient_dashboard.id" v-on:monitor="(id) => { monitor_patient(id) }" />
+        <patientDetails v-else-if="page == 'patientDetails'" :id="patient_dashboard.id" v-on:monitor="monitor_patient()" />
+        
+        <patientDashboard v-else-if="page == 'patient-dashboard'"
+        :patient_id="patient_dashboard.id" />
 
         <div v-if="dialog" class="modal fade show" tabindex="-1" aria-hidden="false" style="display: block;"
             aria-modal="true" role="dialog">
@@ -137,13 +140,15 @@
 import axios from 'axios';
 import patient_list from './lists.vue';
 import patient_requests from './requests.vue';
-import PatientDashboard from './patient_dashboard.vue';
+import patientDetails from './details.vue';
+import patientDashboard from './patient_dashboard.vue';
 
 export default {
     components: {
         patient_list, 
         patient_requests,
-        PatientDashboard
+        patientDetails,
+        patientDashboard
     },
 
     data() {
@@ -165,8 +170,8 @@ export default {
     },
 
     methods: {
-        monitor_patient(id){
-            this.page = 'monitor-patient';
+        monitor_patient(){
+            this.page = 'patient-dashboard';
         },
 
         fetch_request_patients() {
@@ -186,7 +191,7 @@ export default {
 
         patient_info(id){
             this.patient_dashboard.id = id;
-            this.page = 'patientDashboard';
+            this.page = 'patientDetails';
         },
 
         fetch_patients() {

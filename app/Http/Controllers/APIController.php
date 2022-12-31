@@ -16,6 +16,26 @@ class APIController extends Controller
         ];
     }
 
+    public function fetchHeartbeatByPatient(Request $request, $patient_id){
+        $data = Sensors::charts(Sensors::Patient($patient_id)->heartbeat()->chart())
+            ->filterize([
+                'hr',
+                'spo'
+            ])
+            ->render();
+
+        $count = 0;
+        foreach($data['hr'] as $k){
+            $data['numbers'][] = $count;
+            $count++;
+        }
+
+        return [
+            'success' => true,
+            'response' => $data
+        ];
+    }
+
     public function fetchHeartbeatChart(Request $request){
         $data = Sensors::charts(Sensors::heartbeat())
             ->filterize([
