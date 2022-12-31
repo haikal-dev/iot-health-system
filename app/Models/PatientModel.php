@@ -22,6 +22,10 @@ class PatientModel
     protected $other_diseases;
     protected $is_approved;
     protected $registered_at;
+    protected $userid;
+
+    protected $heartbeat;
+    protected $temperature;
 
     public function __construct($name = '', $telegram_id = '', $age = '', $ic_no = '', $hp_no = '', $address = '', $diabetes = '', $hbpressure = '', $asthma = '', $do_operation = '', $other_diseases = '', $is_approved = '', $registered_at = ''){
         $this->name = $name;
@@ -37,6 +41,22 @@ class PatientModel
         $this->other_diseases = $other_diseases;
         $this->is_approved = $is_approved;
         $this->registered_at = $registered_at;
+    }
+
+    public function load_model($hb, $temp, $userid){
+        $this->heartbeat = $hb;
+        $this->temperature = $temp;
+        $this->userid = $userid;
+    }
+
+    public function heartbeat(){
+        $this->heartbeat->get_patient_id($this->userid);
+        return $this->heartbeat;
+    }
+
+    public function temperature(){
+        $this->temperature->get_patient_id($this->userid);
+        return $this->temperature;
     }
 
     public function create(){
@@ -96,7 +116,6 @@ class PatientModel
                 'is_approved' => 1
             ]);
         }
-        
     }
 
     public function get_one($id){

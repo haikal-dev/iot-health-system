@@ -8,8 +8,32 @@ class DeviceModel
 {
     protected $table = 'devices';
 
+    protected $model = [];
+
     public function __construct(){
         //
+    }
+
+    public function get_serial_number($serial_number){
+        $model = DB::table($this->table)->where('serial_number', $serial_number)->first();
+
+        if(isset($model->id)){
+            $this->model = $model;
+        }
+    }
+
+    public function hasPairing(){
+        if(isset($this->model->pairing_id) && $this->model->pairing_id != ''){
+            return true;
+        }
+
+        else {
+            return false;
+        }
+    }
+
+    public function get_pairing_id(){
+        return $this->model->pairing_id;
     }
 
     public function reset_pairing($id){

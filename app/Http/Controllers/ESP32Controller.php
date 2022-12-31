@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\TelegramController as TG;
 use App\Models\Sensors;
+use App\Models\DeviceModel;
+use App\Models\PatientModel;
 
 class ESP32Controller extends Controller
 {
@@ -16,6 +18,11 @@ class ESP32Controller extends Controller
         else {
             $code = $request->code;
             $data = $request->has('data') ? $request->data : '';
+            $serial_number = 'MLX90614/MAX30102';
+
+            $device = new DeviceModel();
+            $device->get_serial_number($serial_number);
+            $patient = new PatientModel();
             
 
             if($code == 'WIFI_STATUS'){
@@ -27,13 +34,20 @@ class ESP32Controller extends Controller
                 }
                 else {
                     Sensors::wifi()->save($ssid, $ip);
-                    TG::message("Device has been connected to Internet with IP: " . $ip)->send();
+
+                    if($device->hasPairing()){
+                        $patient = $patient->get_one($device->get_pairing_id());
+                        TG::reply($patient->telegram_id, "Device has been connected to Internet with IP: " . $ip)->send();
+                    }
                 }
             }
 
             elseif($code == 'HEARTBEAT'){
                 if($data == 'READY'){
-                    TG::message('Sensor is ready. Place your index finger on the sensor with steady pressure.')->send();
+                    if($device->hasPairing()){
+                        $patient = $patient->get_one($device->get_pairing_id());
+                        TG::reply($patient->telegram_id, 'Sensor is ready. Place your index finger on the sensor with steady pressure.')->send();
+                    }
                 }
             }
 
@@ -41,8 +55,15 @@ class ESP32Controller extends Controller
                 if($request->has('temp')){
                     $temp = $request->temp;
 
-                    Sensors::temperature()->save($temp);
-                    TG::message('Temperature is recorded. Temp: ' . $temp)->send();
+                    if(!$device->hasPairing()){
+                        Sensors::temperature()->save($temp);
+                    }
+
+                    else {
+                        $patient = $patient->get_one($device->get_pairing_id());
+                        Sensors::Patient($patient->id)->temperature()->save($temp);
+                        TG::reply($patient->telegram_id, "Temperature is recorded. Temp: " . $temp)->send();
+                    }
                 }
             }
 
@@ -51,8 +72,15 @@ class ESP32Controller extends Controller
                     $hr = $request->hr;
                     $spo = $request->spo;
 
-                    Sensors::heartbeat()->save($hr, $spo);
-                    TG::message('Heartbeat Rate: ' . $hr)->send();
+                    if(!$device->hasPairing()){
+                        Sensors::heartbeat()->save($hr, $spo);
+                    }
+
+                    else {
+                        $patient = $patient->get_one($device->get_pairing_id());
+                        Sensors::Patient($patient->id)->heartbeat()->save($hr, $spo);
+                        TG::reply($patient->telegram_id, "Heartbeat Rate: " . $hr . "\nSPO2: " . $spo)->send();
+                    }
                 }
             }
             
