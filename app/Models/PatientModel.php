@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\TelegramController as Telegram;
 
 class PatientModel
 {
@@ -86,9 +87,16 @@ class PatientModel
     }
 
     public function approve_patient($id){
-        return DB::table($this->table)->where('id', $id)->update([
-            'is_approved' => 1
-        ]);
+        $model = DB::table($this->table)->where('id', $id)->first();
+
+        if(isset($model->telegram_id)){
+            Telegram::reply($model->telegram_id, 'Your account has been approved by doctor.');
+            
+            return DB::table($this->table)->where('id', $id)->update([
+                'is_approved' => 1
+            ]);
+        }
+        
     }
 
     public function get_one($id){
