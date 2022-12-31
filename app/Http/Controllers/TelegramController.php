@@ -14,4 +14,13 @@ class TelegramController
         
         return $bot;
     }
+
+    public static function reply($id, $msg){
+        $bot = new TelegramAPIController;
+        $bot->setChatId($id);
+        $bot->setRobot(env('TELEGRAM_BOT'));
+        $bot->text($msg);
+        
+        return $bot;
+    }
 }

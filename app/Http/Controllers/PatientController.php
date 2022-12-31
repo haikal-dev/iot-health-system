@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SidebarController;
 use App\Models\PatientModel;
+use App\Http\Controllers\TelegramController as Telegram;
 
 class PatientController extends Controller
 {
@@ -115,6 +116,7 @@ class PatientController extends Controller
         );
 
         $result = $model->create();
+        Telegram::reply($request->telegram_id, 'Your account has been approved by doctor.')->send();
 
         if($result){
             return [
