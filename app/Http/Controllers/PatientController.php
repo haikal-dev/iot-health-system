@@ -30,6 +30,7 @@ class PatientController extends Controller
             elseif($request->api == 'update'){
                 $model->update($id, [
                     'name' => $request->name,
+                    'telegram_id' => $request->telegram_id,
                     'age' => $request->age,
                     'ic_no' => $request->ic_no,
                     'hp_no' => $request->hp_no,

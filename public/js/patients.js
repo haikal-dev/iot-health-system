@@ -5524,6 +5524,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().put('/v2/patient/id/' + this.patient.id, {
         api: 'update',
         name: this.patient.name,
+        telegram_id: this.patient.telegram_id,
         age: this.patient.age,
         ic_no: this.patient.ic_no,
         hp_no: this.patient.hp_no,
@@ -6322,6 +6323,37 @@ var render = function render() {
       input: function input($event) {
         if ($event.target.composing) return;
         _vm.$set(_vm.patient, "name", $event.target.value);
+      }
+    }
+  })])])]), _vm._v(" "), _c("div", {
+    staticClass: "row mb-3"
+  }, [_c("div", {
+    staticClass: "col"
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Telegram ID")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.patient.telegram_id,
+      expression: "patient.telegram_id"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      disabled: "",
+      type: "text"
+    },
+    domProps: {
+      value: _vm.patient.telegram_id
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.patient, "telegram_id", $event.target.value);
       }
     }
   })])])]), _vm._v(" "), _c("div", {

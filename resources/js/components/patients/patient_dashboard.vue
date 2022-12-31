@@ -15,7 +15,14 @@
                                     <input :disabled="form_disabled" class="form-control" type="text" v-model="patient.name" />
                                 </div>
                             </div>
-                            
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Telegram ID</label>
+                                    <input disabled class="form-control" type="text" v-model="patient.telegram_id" />
+                                </div>
+                            </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
@@ -156,6 +163,7 @@ export default {
             axios.put('/v2/patient/id/' + this.patient.id, {
                 api: 'update',
                 name: this.patient.name,
+                telegram_id: this.patient.telegram_id,
                 age: this.patient.age,
                 ic_no: this.patient.ic_no,
                 hp_no: this.patient.hp_no,
