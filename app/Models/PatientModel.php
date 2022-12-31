@@ -92,11 +92,21 @@ class PatientModel
         ]);
     }
 
-    public function lists($approved = false){
+    public function lists($approved = false, $hasTelegram = false){
         $data = [];
         
-        if($approved){
+        if($approved && !$hasTelegram){
             $data = DB::table($this->table)->where('is_approved', '1')->orderBy('registered_at', 'desc')->get();
+        }
+
+        elseif($approved && $hasTelegram){
+            $pre_model = DB::table($this->table)->where('is_approved', '1')->orderBy('registered_at', 'desc')->get();
+
+            foreach($pre_model as $model){
+                if($model->telegram_id != ''){
+                    $data[] = $model;
+                }
+            }
         }
 
         else {

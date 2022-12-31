@@ -89,6 +89,13 @@ class PatientController extends Controller
             ];
         }
 
+        elseif($request->has('data') && $request->data == 'approvedHasTelegram'){
+            return [
+                'status' => true,
+                'patients' => $model->lists(true, true)
+            ];
+        }
+
         else {
             return [
                 'status' => true,
