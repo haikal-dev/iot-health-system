@@ -9,6 +9,7 @@ class PatientModel
     protected $table = 'patients';
 
     protected $name;
+    protected $telegram_id;
     protected $age;
     protected $ic_no;
     protected $hp_no;
@@ -21,8 +22,9 @@ class PatientModel
     protected $is_approved;
     protected $registered_at;
 
-    public function __construct($name = '', $age = '', $ic_no = '', $hp_no = '', $address = '', $diabetes = '', $hbpressure = '', $asthma = '', $do_operation = '', $other_diseases = '', $is_approved = '', $registered_at = ''){
+    public function __construct($name = '', $telegram_id = '', $age = '', $ic_no = '', $hp_no = '', $address = '', $diabetes = '', $hbpressure = '', $asthma = '', $do_operation = '', $other_diseases = '', $is_approved = '', $registered_at = ''){
         $this->name = $name;
+        $this->telegram_id = $telegram_id;
         $this->age = $age;
         $this->ic_no = $ic_no;
         $this->hp_no = $hp_no;
@@ -39,6 +41,7 @@ class PatientModel
     public function create(){
         return DB::table($this->table)->insert([
             'name' => $this->name,
+            'telegram_id' => $this->telegram_id,
             'age' => $this->age,
             'ic_no' => $this->ic_no,
             'hp_no' => $this->hp_no,
@@ -55,6 +58,7 @@ class PatientModel
     public function update($id, $data){
         return DB::table($this->table)->where('id', $id)->update([
             'name' => $data['name'],
+            'telegram_id' => $data['telegram_id'],
             'age' => $data['age'],
             'ic_no' => $data['ic_no'],
             'hp_no' => $data['hp_no'],
