@@ -1,23 +1,42 @@
 <template>
-    <div class="row">
-        <div class="col-md-12 col-lg-12 order-1 mb-4">
-            <div class="card h-100">
-                <div class="card-header">
-                    <h4>HEARTBEAT ANALYSIS</h4>
+    <div>
+        <div class="row">
+            <div class="col-md-6 col-lg-6 order-1 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><small style="font-size: 0.8rem;">NAME</small><br/>{{ patient.name.toUpperCase() }}</h3>
+                        <h3><small style="font-size: 0.8rem;">IDENTITY CARD</small><br/>{{ patient.ic_no }}</h3>
+                    </div>
                 </div>
-                <div class="card-body px-0">
-                    <div class="tab-content p-0">
-                        <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
-                            <div v-if="sensor.hr && sensor.hr.length > 0" id="incomeChart"></div>
-                            <div v-else>
-                                <div class="alert alert-info text-primary" style="margin: 10px 20px;">No data is
-                                    available.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 order-1 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4>HEARTBEAT ANALYSIS</h4>
+                    </div>
+                    <div class="card-body px-0">
+                        <div class="tab-content p-0">
+                            <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
+                                <div v-if="!chart_has_render" style="margin: 10px 20px;">
+                                    Rendering data...
+                                </div>
+                                <div v-else>
+                                    <div v-if="sensor.hr && sensor.hr.length > 0" id="incomeChart"></div>
+                                    <div v-else>
+                                        <div class="alert alert-info text-primary" style="margin: 10px 20px;">No data is
+                                            available.</div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -30,15 +49,30 @@ export default {
     data() {
         return {
             sensor: [],
-            chart_has_render: false
+            chart_has_render: false,
+            patient: []
         }
     },
 
     created() {
+        this.fetch_patient_detail();
         this.fetch_patient_dashboard();
     },
 
     methods: {
+        fetch_patient_detail() {
+            axios.get('/v2/patient/id/' + this.patient_id)
+                .then((res) => {
+                    // console.log(res);
+                    if (res.data.status) {
+                        this.patient = res.data.patient;
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+
         fetch_patient_dashboard() {
             setInterval(() => {
                 axios.get('/v2/charts/heartbeat/id/' + this.patient_id)
