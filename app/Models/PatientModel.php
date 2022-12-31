@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\TelegramController as Telegram;
 
 class PatientModel
 {
     protected $table = 'patients';
 
     protected $name;
+    protected $telegram_id;
     protected $age;
     protected $ic_no;
     protected $hp_no;
@@ -20,9 +22,14 @@ class PatientModel
     protected $other_diseases;
     protected $is_approved;
     protected $registered_at;
+    protected $userid;
 
-    public function __construct($name = '', $age = '', $ic_no = '', $hp_no = '', $address = '', $diabetes = '', $hbpressure = '', $asthma = '', $do_operation = '', $other_diseases = '', $is_approved = '', $registered_at = ''){
+    protected $heartbeat;
+    protected $temperature;
+
+    public function __construct($name = '', $telegram_id = '', $age = '', $ic_no = '', $hp_no = '', $address = '', $diabetes = '', $hbpressure = '', $asthma = '', $do_operation = '', $other_diseases = '', $is_approved = '', $registered_at = ''){
         $this->name = $name;
+        $this->telegram_id = $telegram_id;
         $this->age = $age;
         $this->ic_no = $ic_no;
         $this->hp_no = $hp_no;
@@ -36,9 +43,26 @@ class PatientModel
         $this->registered_at = $registered_at;
     }
 
+    public function load_model($hb, $temp, $userid){
+        $this->heartbeat = $hb;
+        $this->temperature = $temp;
+        $this->userid = $userid;
+    }
+
+    public function heartbeat(){
+        $this->heartbeat->get_patient_id($this->userid);
+        return $this->heartbeat;
+    }
+
+    public function temperature(){
+        $this->temperature->get_patient_id($this->userid);
+        return $this->temperature;
+    }
+
     public function create(){
         return DB::table($this->table)->insert([
             'name' => $this->name,
+            'telegram_id' => $this->telegram_id,
             'age' => $this->age,
             'ic_no' => $this->ic_no,
             'hp_no' => $this->hp_no,
@@ -55,6 +79,7 @@ class PatientModel
     public function update($id, $data){
         return DB::table($this->table)->where('id', $id)->update([
             'name' => $data['name'],
+            'telegram_id' => $data['telegram_id'],
             'age' => $data['age'],
             'ic_no' => $data['ic_no'],
             'hp_no' => $data['hp_no'],
@@ -67,11 +92,21 @@ class PatientModel
         ]);
     }
 
-    public function lists($approved = false){
+    public function lists($approved = false, $hasTelegram = false){
         $data = [];
         
-        if($approved){
+        if($approved && !$hasTelegram){
             $data = DB::table($this->table)->where('is_approved', '1')->orderBy('registered_at', 'desc')->get();
+        }
+
+        elseif($approved && $hasTelegram){
+            $pre_model = DB::table($this->table)->where('is_approved', '1')->orderBy('registered_at', 'desc')->get();
+
+            foreach($pre_model as $model){
+                if($model->telegram_id != ''){
+                    $data[] = $model;
+                }
+            }
         }
 
         else {
@@ -82,9 +117,15 @@ class PatientModel
     }
 
     public function approve_patient($id){
-        return DB::table($this->table)->where('id', $id)->update([
-            'is_approved' => 1
-        ]);
+        $model = DB::table($this->table)->where('id', $id)->first();
+
+        if(isset($model->telegram_id)){
+            Telegram::reply($model->telegram_id, 'Your account has been approved by doctor.')->send();
+
+            return DB::table($this->table)->where('id', $id)->update([
+                'is_approved' => 1
+            ]);
+        }
     }
 
     public function get_one($id){

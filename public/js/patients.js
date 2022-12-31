@@ -5566,6 +5566,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         name: '',
+        telegram_id: window.telegram_id,
         age: '',
         ic: '',
         mobileNo: '',
@@ -5584,11 +5585,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     register: function register() {
       var _this = this;
-      if (this.form.name == '' || this.form.age == '' || this.form.ic == '' || this.form.mobileNo == '' || this.form.address == '' || this.form.health.diabetes == '' || this.form.health.highbloodpressure == '' || this.form.health.asthma == '' || this.form.health.doOperation == '') {
+      if (this.form.name == '' || this.form.telegram_id == '' || this.form.age == '' || this.form.ic == '' || this.form.mobileNo == '' || this.form.address == '' || this.form.health.diabetes == '' || this.form.health.highbloodpressure == '' || this.form.health.asthma == '' || this.form.health.doOperation == '') {
         alert("Don't leave form empty!");
       } else {
         axios__WEBPACK_IMPORTED_MODULE_0___default().post('/register', {
           name: this.form.name,
+          telegram_id: this.form.telegram_id,
           age: this.form.age,
           ic_no: this.form.ic,
           hp_no: this.form.mobileNo,
@@ -6851,6 +6853,33 @@ var render = function render() {
       input: function input($event) {
         if ($event.target.composing) return;
         _vm.$set(_vm.form, "mobileNo", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Telegram ID")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.telegram_id,
+      expression: "form.telegram_id"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      disabled: ""
+    },
+    domProps: {
+      value: _vm.form.telegram_id
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.form, "telegram_id", $event.target.value);
       }
     }
   })]), _vm._v(" "), _c("div", {

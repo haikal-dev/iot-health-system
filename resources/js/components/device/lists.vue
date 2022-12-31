@@ -149,7 +149,7 @@ export default {
         },
 
         fetch_patient_lists(){
-            axios.get('/v2/patient?data=approved')
+            axios.get('/v2/patient?data=approvedHasTelegram')
             .then((res) => {
                 // console.log(res);
                 this.patients = res.data.patients;

@@ -5429,7 +5429,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     fetch_patient_lists: function fetch_patient_lists() {
       var _this5 = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/v2/patient?data=approved').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/v2/patient?data=approvedHasTelegram').then(function (res) {
         // console.log(res);
         _this5.patients = res.data.patients;
       })["catch"](function (err) {

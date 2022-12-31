@@ -5423,7 +5423,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
               type: 'area'
             },
             dataLabels: {
-              enabled: false
+              enabled: true
             },
             stroke: {
               width: 2,
@@ -5482,7 +5482,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
                 show: false
               },
               labels: {
-                show: false,
+                show: true,
                 style: {
                   fontSize: '13px',
                   colors: axisColor
@@ -5491,7 +5491,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             },
             yaxis: {
               labels: {
-                show: false
+                show: true
               },
               min: 10,
               max: 200,

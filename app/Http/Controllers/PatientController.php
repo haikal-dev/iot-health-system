@@ -69,7 +69,14 @@ class PatientController extends Controller
     }
 
     public function register(Request $request){
-        return view('patients.register');
+        if($request->has('id')){
+            return view('patients.register')
+                ->with('telegram_id', $request->id);
+        }
+
+        else {
+            return response(['message' => 'invalid request'], 401);
+        }
     }
 
     public function fetch_approved_lists(Request $request){
@@ -79,6 +86,13 @@ class PatientController extends Controller
             return [
                 'status' => true,
                 'patients' => $model->lists(true)
+            ];
+        }
+
+        elseif($request->has('data') && $request->data == 'approvedHasTelegram'){
+            return [
+                'status' => true,
+                'patients' => $model->lists(true, true)
             ];
         }
 
@@ -93,6 +107,7 @@ class PatientController extends Controller
     public function create_patient(Request $request){
         $model = new PatientModel(
             $request->name,
+            $request->telegram_id,
             $request->age,
             $request->ic_no,
             $request->hp_no,

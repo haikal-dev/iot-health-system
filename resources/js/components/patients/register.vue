@@ -21,6 +21,10 @@
                 <input class="form-control" type="number" v-model="form.mobileNo" placeholder="850908027893" />
             </div>
             <div class="form-group mb-3">
+                <label for="">Telegram ID</label>
+                <input class="form-control" type="text" disabled v-model="form.telegram_id" />
+            </div>
+            <div class="form-group mb-3">
                 <label for="">Address</label>
                 <textarea style="height: 150px;" class="form-control" type="text" v-model="form.address"
                     placeholder="No 10, Jalan Hang Tuah, 90222, Melaka, Malaysia"></textarea>
@@ -76,6 +80,7 @@ export default {
         return {
             form: {
                 name: '',
+                telegram_id: window.telegram_id,
                 age: '',
                 ic: '',
                 mobileNo: '',
@@ -96,6 +101,7 @@ export default {
         register() {
             if (
                 this.form.name == '' ||
+                this.form.telegram_id == '' ||
                 this.form.age == '' ||
                 this.form.ic == '' ||
                 this.form.mobileNo == '' ||
@@ -111,6 +117,7 @@ export default {
             else {
                 axios.post('/register', {
                     name: this.form.name,
+                    telegram_id: this.form.telegram_id,
                     age: this.form.age,
                     ic_no: this.form.ic,
                     hp_no: this.form.mobileNo,
