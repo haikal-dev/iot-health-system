@@ -37,6 +37,7 @@ Route::middleware(['isAuth'])->group(function(){
         Route::get('/temp', [API::class, 'fetchTemp']);
         Route::get('/charts/heartbeat', [API::class, 'fetchHeartbeatChart']);
         Route::get('/charts/heartbeat/id/{patient_id}', [API::class, 'fetchHeartbeatByPatient']);
+        Route::get('/charts/temperature/id/{patient_id}', [API::class, 'fetchTemperatureByPatient']);
 
         Route::prefix('/patient')->group(function(){
             Route::get('/', [Patient::class, 'fetch_approved_lists']);

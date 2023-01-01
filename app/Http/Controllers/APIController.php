@@ -16,6 +16,25 @@ class APIController extends Controller
         ];
     }
 
+    public function fetchTemperatureByPatient(Request $request, $patient_id){
+        $data = Sensors::charts(Sensors::Patient($patient_id)->temperature()->chart())
+            ->filterize([
+                'temp'
+            ])
+            ->render();
+
+        $count = 0;
+        foreach($data['temp'] as $k){
+            $data['numbers'][] = $count;
+            $count++;
+        }
+
+        return [
+            'status' => true,
+            'response' => $data
+        ];
+    }
+
     public function fetchHeartbeatByPatient(Request $request, $patient_id){
         $data = Sensors::charts(Sensors::Patient($patient_id)->heartbeat()->chart())
             ->filterize([

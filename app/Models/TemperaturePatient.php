@@ -29,4 +29,21 @@ class TemperaturePatient
     public function remove(){
         return DB::table($this->table)->where('patient_id', $this->patient_id)->delete();
     }
+
+    public function chart(){
+        $data = [];
+
+        $model = DB::table($this->table)->where('patient_id', $this->patient_id)->select(DB::raw('count(*) as total'))->first();
+
+        if($model->total > 10){
+            $skipped = $model->total - 10;
+            $data = DB::table($this->table)->where('patient_id', $this->patient_id)->skip($skipped)->take(10)->get();
+        }
+
+        else {
+            $data = DB::table($this->table)->where('patient_id', $this->patient_id)->get();
+        }
+        
+        return $data;
+    }
 }
