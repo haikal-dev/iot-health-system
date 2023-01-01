@@ -4,9 +4,9 @@
             <div class="col-md-6 col-lg-6 order-1 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h4><small style="font-size: 0.8rem;">NAME</small><br/>{{ patient.name }}</h4>
-                        <h4><small style="font-size: 0.8rem;">IDENTITY CARD</small><br/>{{ patient.ic_no }}</h4>
-                        <h4><small style="font-size: 0.8rem;">TELEGRAM ID</small><br/>{{ patient.telegram_id }}</h4>
+                        <div class="patient-info"><small>NAME</small><br/>{{ patient.name }}</div>
+                        <div class="patient-info"><small>IDENTITY CARD</small><br/>{{ patient.ic_no }}</div>
+                        <div class="patient-info"><small>TELEGRAM ID</small><br/>{{ patient.telegram_id }}</div>
                     </div>
                 </div>
             </div>
@@ -393,3 +393,16 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.patient-info {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.patient-info small {
+    font-size: 0.7rem;
+    color: blue;
+}
+</style>
