@@ -43,6 +43,16 @@ class PatientModel
         $this->registered_at = $registered_at;
     }
 
+    public function removeAll(){
+        $this->heartbeat()->remove();
+        $this->temperature()->remove();
+        $this->remove();
+    }
+
+    public function remove(){
+        return DB::table($this->table)->where('id', $this->userid)->delete();
+    }
+
     public function load_model($hb, $temp, $userid){
         $this->heartbeat = $hb;
         $this->temperature = $temp;

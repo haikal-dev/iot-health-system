@@ -42,6 +42,7 @@ Route::middleware(['isAuth'])->group(function(){
             Route::get('/', [Patient::class, 'fetch_approved_lists']);
             Route::get('/id/{id}', [Patient::class, 'fetch_patient_id']);
             Route::put('/id/{id}', [Patient::class, 'update']);
+            Route::delete('/id/{id}', [Patient::class, 'remove']);
         });
 
         Route::prefix('/device')->group(function(){

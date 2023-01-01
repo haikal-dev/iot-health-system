@@ -19,7 +19,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="navs-patient-list" role="tabpanel">
-                    <patient_list :patients="request_patients" v-on:patient_info="(id) => { patient_info(id) }" />
+                    <patient_list :patients="request_patients" v-on:patient_info="(id) => { patient_info(id) }" v-on:datachanged="reload_data_changed()" />
                 </div>
                 <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
                     <patient_requests :patients="patients" v-on:review="(id) => { review_request_patient(id) }" />
@@ -187,6 +187,10 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+
+        reload_data_changed(){
+            this.fetch_request_patients();
         },
 
         patient_info(id){

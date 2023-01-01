@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SidebarController;
 use App\Models\PatientModel;
+use App\Models\Sensors;
 
 class PatientController extends Controller
 {
@@ -67,6 +68,14 @@ class PatientController extends Controller
                 'patient' => $result
             ];
         }
+    }
+
+    public function remove(Request $request, $id){
+        Sensors::Patient($id)->removeAll();
+
+        return [
+            'status' => true
+        ];
     }
 
     public function register(Request $request){

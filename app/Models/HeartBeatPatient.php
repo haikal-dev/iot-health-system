@@ -20,6 +20,10 @@ class HeartBeatPatient
         $this->patient_id = $patient_id;
     }
 
+    public function remove(){
+        return DB::table($this->table)->where('patient_id', $this->patient_id)->delete();
+    }
+
     public function save($hr, $spo){
         return DB::table($this->table)->insert([
             'patient_id' => $this->patient_id,

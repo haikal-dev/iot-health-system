@@ -15,7 +15,8 @@
                     :patient="patient"
                     :key="index"
                     :id="index+1"
-                    v-on:patient_info="(id) => { $emit('patient_info', id) }" />
+                    v-on:patient_info="(id) => { $emit('patient_info', id) }"
+                    v-on:datachanged="$emit('datachanged')" />
             </tbody>
         </table>
     </div>

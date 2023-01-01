@@ -25,4 +25,8 @@ class TemperaturePatient
             'created_at' => time()
         ]);
     }
+
+    public function remove(){
+        return DB::table($this->table)->where('patient_id', $this->patient_id)->delete();
+    }
 }
