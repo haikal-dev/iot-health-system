@@ -4,9 +4,32 @@
             <div class="col-md-6 col-lg-6 order-1 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h3><small style="font-size: 0.8rem;">NAME</small><br/>{{ patient.name.toUpperCase() }}</h3>
-                        <h3><small style="font-size: 0.8rem;">IDENTITY CARD</small><br/>{{ patient.ic_no }}</h3>
-                        <h3><small style="font-size: 0.8rem;">TELEGRAM ID</small><br/>{{ patient.telegram_id }}</h3>
+                        <h4><small style="font-size: 0.8rem;">NAME</small><br/>{{ patient.name }}</h4>
+                        <h4><small style="font-size: 0.8rem;">IDENTITY CARD</small><br/>{{ patient.ic_no }}</h4>
+                        <h4><small style="font-size: 0.8rem;">TELEGRAM ID</small><br/>{{ patient.telegram_id }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 order-1 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>TEMPERATURE ANALYSIS</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content p-0">
+                            <div class="tab-pane fade show active" role="tabpanel">
+                                <div v-if="!temperature.render" style="margin: 10px 20px;">
+                                    Rendering data...
+                                </div>
+                                <div v-else>
+                                    <div v-if="temperature.data.length > 0" id="tempChart"></div>
+                                    <div v-else>
+                                        <div class="alert alert-info text-primary" style="margin: 10px 20px;">No data is
+                                            available.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,7 +53,6 @@
                                             available.</div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -51,7 +73,11 @@ export default {
         return {
             sensor: [],
             chart_has_render: false,
-            patient: []
+            patient: [],
+            temperature: {
+                data: [],
+                render: false
+            }
         }
     },
 

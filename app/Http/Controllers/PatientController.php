@@ -63,6 +63,7 @@ class PatientController extends Controller
         }
 
         else {
+            $result->name = strtoupper($result->name);
             return [
                 'status' => true,
                 'patient' => $result
