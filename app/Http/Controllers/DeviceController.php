@@ -49,7 +49,16 @@ class DeviceController extends Controller
         $data = [];
 
         foreach($device as $dev){
-            $dev->pairing_id = ($dev->pairing_id != '') ? $patient->get_one($dev->pairing_id)->name : '';
+            if($dev->pairing_id != ''){
+                $k = $patient->get_one($dev->pairing_id);
+                if(isset($k->name)){
+                    $dev->pairing_id = strtoupper($k->name);
+                }
+
+                else {
+                    $dev->pairing_id = 'deleted';
+                }
+            }
             $dev->last_updated = gmdate('d/m/Y H:i', $dev->last_updated + (3600*8));
             $data[] = $dev;
         }

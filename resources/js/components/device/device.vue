@@ -2,7 +2,15 @@
     <tr>
         <td>{{ id }}</td>
         <td>{{ device.serial_number }}</td>
-        <td>{{ device.pairing_id != '' ? device.pairing_id : 'NO PAIRING' }}</td>
+        <td v-if="device.pairing_id != ''">
+            <span v-if="device.pairing_id == 'deleted'" class="badge badge-danger">
+                PATIENT WAS DELETED
+            </span>
+            <span v-else>{{ device.pairing_id }}</span>
+        </td>
+        <td v-else>
+            <span class="badge badge-danger">NO PAIRING</span>
+        </td>
         <td>{{ device.last_updated != '' ? device.last_updated : '-' }}</td>
         <td>
             <button v-if="device.pairing_id == ''" class="btn btn-primary" @click="pair()">Pair</button>
@@ -25,3 +33,14 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+.badge-danger {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    font-size: 0.8rem;
+}
+
+</style>
