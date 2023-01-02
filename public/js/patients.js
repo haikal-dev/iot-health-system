@@ -5917,6 +5917,17 @@ __webpack_require__.r(__webpack_exports__);
           highbloodpressure: '',
           asthma: '',
           doOperation: '',
+          fever: '',
+          cough: '',
+          shortness_breath: '',
+          fatique: '',
+          body_aches: '',
+          loss_taste: '',
+          sore_throats: '',
+          diarrhea: '',
+          nausea_vomitting: '',
+          day_sick: '',
+          heart_diseases: '',
           any: ''
         },
         isSent: false
@@ -5926,7 +5937,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     register: function register() {
       var _this = this;
-      if (this.form.name == '' || this.form.telegram_id == '' || this.form.age == '' || this.form.ic == '' || this.form.mobileNo == '' || this.form.address == '' || this.form.health.diabetes == '' || this.form.health.highbloodpressure == '' || this.form.health.asthma == '' || this.form.health.doOperation == '') {
+      if (this.form.name == '' || this.form.telegram_id == '' || this.form.age == '' || this.form.ic == '' || this.form.mobileNo == '' || this.form.address == '' || this.form.health.diabetes == '' || this.form.health.highbloodpressure == '' || this.form.health.asthma == '' || this.form.health.doOperation == '' || this.form.health.fever == '' || this.form.health.cough == '' || this.form.health.shortness_breath == '' || this.form.health.fatique == '' || this.form.health.body_aches == '' || this.form.health.loss_taste == '' || this.form.health.sore_throats == '' || this.form.health.diarrhea == '' || this.form.health.nausea_vomitting == '' || this.form.health.day_sick == '' || this.form.health.heart_diseases == '') {
         alert("Don't leave form empty!");
       } else {
         axios__WEBPACK_IMPORTED_MODULE_0___default().post('/register', {
@@ -5939,6 +5950,17 @@ __webpack_require__.r(__webpack_exports__);
           diabetes: this.form.health.diabetes,
           hbpressure: this.form.health.highbloodpressure,
           asthma: this.form.health.asthma,
+          fever: this.form.health.fever,
+          cough: this.form.health.cough,
+          shortness_breath: this.form.health.shortness_breath,
+          fatique: this.form.health.fatique,
+          body_aches: this.form.health.body_aches,
+          loss_taste: this.form.health.loss_taste,
+          sore_throats: this.form.health.sore_throats,
+          diarrhea: this.form.health.diarrhea,
+          nausea_vomitting: this.form.health.nausea_vomitting,
+          day_sick: this.form.health.day_sick,
+          heart_diseases: this.form.health.heart_diseases,
           do_operation: this.form.health.doOperation,
           other_diseases: this.form.health.any
         }).then(function (res) {
@@ -7588,6 +7610,509 @@ var render = function render() {
     on: {
       change: function change($event) {
         return _vm.$set(_vm.form.health, "doOperation", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Fever")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.fever,
+      expression: "form.health.fever"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.fever, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "fever", "NO");
+      }
+    }
+  }), _vm._v(" No"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.fever,
+      expression: "form.health.fever"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.fever, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "fever", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Cough")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.cough,
+      expression: "form.health.cough"
+    }],
+    attrs: {
+      type: "radio",
+      value: "Dry Cough"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.cough, "Dry Cough")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "cough", "Dry Cough");
+      }
+    }
+  }), _vm._v(" Dry Cough"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.cough,
+      expression: "form.health.cough"
+    }],
+    attrs: {
+      type: "radio",
+      value: "Cough With Mucus"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.cough, "Cough With Mucus")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "cough", "Cough With Mucus");
+      }
+    }
+  }), _vm._v(" Cough With Mucus"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.cough,
+      expression: "form.health.cough"
+    }],
+    attrs: {
+      type: "radio",
+      value: "Normal Cough"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.cough, "Normal Cough")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "cough", "Normal Cough");
+      }
+    }
+  }), _vm._v(" Normal Cough\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Shortness of breath")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.shortness_breath,
+      expression: "form.health.shortness_breath"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.shortness_breath, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "shortness_breath", "NO");
+      }
+    }
+  }), _vm._v(" No"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.shortness_breath,
+      expression: "form.health.shortness_breath"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.shortness_breath, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "shortness_breath", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Fatique")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.fatique,
+      expression: "form.health.fatique"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.fatique, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "fatique", "NO");
+      }
+    }
+  }), _vm._v(" No"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.fatique,
+      expression: "form.health.fatique"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.fatique, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "fatique", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Body Aches")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.body_aches,
+      expression: "form.health.body_aches"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.body_aches, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "body_aches", "NO");
+      }
+    }
+  }), _vm._v(" No"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.body_aches,
+      expression: "form.health.body_aches"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.body_aches, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "body_aches", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Loss of Smell / Taste")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.loss_taste,
+      expression: "form.health.loss_taste"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.loss_taste, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "loss_taste", "NO");
+      }
+    }
+  }), _vm._v(" No"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.loss_taste,
+      expression: "form.health.loss_taste"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.loss_taste, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "loss_taste", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Sore Throats")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.sore_throats,
+      expression: "form.health.sore_throats"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.sore_throats, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "sore_throats", "NO");
+      }
+    }
+  }), _vm._v(" No"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.sore_throats,
+      expression: "form.health.sore_throats"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.sore_throats, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "sore_throats", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Diarrhea")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.diarrhea,
+      expression: "form.health.diarrhea"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.diarrhea, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "diarrhea", "NO");
+      }
+    }
+  }), _vm._v(" No"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.diarrhea,
+      expression: "form.health.diarrhea"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.diarrhea, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "diarrhea", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Nausea or Vomitting?")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.nausea_vomitting,
+      expression: "form.health.nausea_vomitting"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.nausea_vomitting, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "nausea_vomitting", "NO");
+      }
+    }
+  }), _vm._v(" No"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.nausea_vomitting,
+      expression: "form.health.nausea_vomitting"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.nausea_vomitting, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "nausea_vomitting", "YES");
+      }
+    }
+  }), _vm._v(" Yes\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("How many days have you been sick?")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.day_sick,
+      expression: "form.health.day_sick"
+    }],
+    attrs: {
+      type: "radio",
+      value: "Less than 7 days"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.day_sick, "Less than 7 days")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "day_sick", "Less than 7 days");
+      }
+    }
+  }), _vm._v(" Less than 7 days"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.day_sick,
+      expression: "form.health.day_sick"
+    }],
+    attrs: {
+      type: "radio",
+      value: "More than 7 days"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.day_sick, "More than 7 days")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "day_sick", "More than 7 days");
+      }
+    }
+  }), _vm._v(" More than 7 days\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mb-3"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Heart Diseases")]), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.heart_diseases,
+      expression: "form.health.heart_diseases"
+    }],
+    attrs: {
+      type: "radio",
+      value: "NO"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.heart_diseases, "NO")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "heart_diseases", "NO");
+      }
+    }
+  }), _vm._v(" No"), _c("br"), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.form.health.heart_diseases,
+      expression: "form.health.heart_diseases"
+    }],
+    attrs: {
+      type: "radio",
+      value: "YES"
+    },
+    domProps: {
+      checked: _vm._q(_vm.form.health.heart_diseases, "YES")
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.form.health, "heart_diseases", "YES");
       }
     }
   }), _vm._v(" Yes\n        ")]), _vm._v(" "), _c("div", {

@@ -57,6 +57,73 @@
             </div>
 
             <div class="form-group mb-3">
+                <label for="">Fever</label><br />
+                <input type="radio" v-model="form.health.fever" value="NO" /> No<br />
+                <input type="radio" v-model="form.health.fever" value="YES" /> Yes
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="">Cough</label><br />
+                <input type="radio" v-model="form.health.cough" value="Dry Cough" /> Dry Cough<br />
+                <input type="radio" v-model="form.health.cough" value="Cough With Mucus" /> Cough With Mucus<br/>
+                <input type="radio" v-model="form.health.cough" value="Normal Cough" /> Normal Cough
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="">Shortness of breath</label><br />
+                <input type="radio" v-model="form.health.shortness_breath" value="NO" /> No<br />
+                <input type="radio" v-model="form.health.shortness_breath" value="YES" /> Yes
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="">Fatique</label><br />
+                <input type="radio" v-model="form.health.fatique" value="NO" /> No<br />
+                <input type="radio" v-model="form.health.fatique" value="YES" /> Yes
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="">Body Aches</label><br />
+                <input type="radio" v-model="form.health.body_aches" value="NO" /> No<br />
+                <input type="radio" v-model="form.health.body_aches" value="YES" /> Yes
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="">Loss of Smell / Taste</label><br />
+                <input type="radio" v-model="form.health.loss_taste" value="NO" /> No<br />
+                <input type="radio" v-model="form.health.loss_taste" value="YES" /> Yes
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="">Sore Throats</label><br />
+                <input type="radio" v-model="form.health.sore_throats" value="NO" /> No<br />
+                <input type="radio" v-model="form.health.sore_throats" value="YES" /> Yes
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="">Diarrhea</label><br />
+                <input type="radio" v-model="form.health.diarrhea" value="NO" /> No<br />
+                <input type="radio" v-model="form.health.diarrhea" value="YES" /> Yes
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="">Nausea or Vomitting?</label><br />
+                <input type="radio" v-model="form.health.nausea_vomitting" value="NO" /> No<br />
+                <input type="radio" v-model="form.health.nausea_vomitting" value="YES" /> Yes
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="">How many days have you been sick?</label><br />
+                <input type="radio" v-model="form.health.day_sick" value="Less than 7 days" /> Less than 7 days<br />
+                <input type="radio" v-model="form.health.day_sick" value="More than 7 days" /> More than 7 days
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="">Heart Diseases</label><br />
+                <input type="radio" v-model="form.health.heart_diseases" value="NO" /> No<br />
+                <input type="radio" v-model="form.health.heart_diseases" value="YES" /> Yes
+            </div>
+
+            <div class="form-group mb-3">
                 <label for="">Any other diseases? (Optional)</label><br />
                 <textarea style="height: 150px;" class="form-control" type="text" v-model="form.health.any" />
             </div>
@@ -90,6 +157,17 @@ export default {
                     highbloodpressure: '',
                     asthma: '',
                     doOperation: '',
+                    fever: '',
+                    cough: '',
+                    shortness_breath: '',
+                    fatique: '',
+                    body_aches: '',
+                    loss_taste: '',
+                    sore_throats: '',
+                    diarrhea: '',
+                    nausea_vomitting: '',
+                    day_sick: '',
+                    heart_diseases: '',
                     any: ''
                 },
                 isSent: false
@@ -109,7 +187,18 @@ export default {
                 this.form.health.diabetes == '' ||
                 this.form.health.highbloodpressure == '' ||
                 this.form.health.asthma == '' ||
-                this.form.health.doOperation == ''
+                this.form.health.doOperation == '' ||
+                this.form.health.fever == '' ||
+                this.form.health.cough == '' ||
+                this.form.health.shortness_breath == '' ||
+                this.form.health.fatique == '' ||
+                this.form.health.body_aches == '' ||
+                this.form.health.loss_taste == '' ||
+                this.form.health.sore_throats == '' ||
+                this.form.health.diarrhea == '' ||
+                this.form.health.nausea_vomitting == '' ||
+                this.form.health.day_sick == '' ||
+                this.form.health.heart_diseases == ''
             ) {
                 alert("Don't leave form empty!");
             }
@@ -125,6 +214,17 @@ export default {
                     diabetes: this.form.health.diabetes,
                     hbpressure: this.form.health.highbloodpressure,
                     asthma: this.form.health.asthma,
+                    fever: this.form.health.fever,
+                    cough: this.form.health.cough,
+                    shortness_breath: this.form.health.shortness_breath,
+                    fatique: this.form.health.fatique,
+                    body_aches: this.form.health.body_aches,
+                    loss_taste: this.form.health.loss_taste,
+                    sore_throats: this.form.health.sore_throats,
+                    diarrhea: this.form.health.diarrhea,
+                    nausea_vomitting: this.form.health.nausea_vomitting,
+                    day_sick: this.form.health.day_sick,
+                    heart_diseases: this.form.health.heart_diseases,
                     do_operation: this.form.health.doOperation,
                     other_diseases: this.form.health.any
                 })

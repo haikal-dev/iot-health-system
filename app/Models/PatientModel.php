@@ -19,6 +19,17 @@ class PatientModel
     protected $hbpressure;
     protected $asthma;
     protected $do_operation;
+    protected $fever;
+    protected $cough;
+    protected $shortness_breath;
+    protected $fatique;
+    protected $body_aches;
+    protected $loss_taste;
+    protected $sore_throats;
+    protected $diarrhea;
+    protected $nausea_vomitting;
+    protected $day_sick;
+    protected $heart_diseases;
     protected $other_diseases;
     protected $is_approved;
     protected $registered_at;
@@ -27,7 +38,33 @@ class PatientModel
     protected $heartbeat;
     protected $temperature;
 
-    public function __construct($name = '', $telegram_id = '', $age = '', $ic_no = '', $hp_no = '', $address = '', $diabetes = '', $hbpressure = '', $asthma = '', $do_operation = '', $other_diseases = '', $is_approved = '', $registered_at = ''){
+    public function __construct(
+            $name = '', 
+            $telegram_id = '', 
+            $age = '', 
+            $ic_no = '', 
+            $hp_no = '', 
+            $address = '', 
+            $diabetes = '', 
+            $hbpressure = '', 
+            $asthma = '', 
+            $do_operation = '', 
+            $fever = '', 
+            $cough = '', 
+            $shortness_breath = '', 
+            $fatique = '', 
+            $body_aches = '', 
+            $loss_taste = '', 
+            $sore_throats = '', 
+            $diarrhea = '', 
+            $nausea_vomitting = '', 
+            $day_sick = '', 
+            $heart_diseases = '', 
+            $other_diseases = '', 
+            $is_approved = '', 
+            $registered_at = ''
+        ){
+        
         $this->name = $name;
         $this->telegram_id = $telegram_id;
         $this->age = $age;
@@ -38,6 +75,17 @@ class PatientModel
         $this->hbpressure = $hbpressure;
         $this->asthma = $asthma;
         $this->do_operation = $do_operation;
+        $this->fever = $fever;
+        $this->cough = $cough;
+        $this->shortness_breath = $shortness_breath;
+        $this->fatique = $fatique;
+        $this->body_aches = $body_aches;
+        $this->loss_taste = $loss_taste;
+        $this->sore_throats = $sore_throats;
+        $this->diarrhea = $diarrhea;
+        $this->nausea_vomitting = $nausea_vomitting;
+        $this->day_sick = $day_sick;
+        $this->heart_diseases = $heart_diseases;
         $this->other_diseases = $other_diseases;
         $this->is_approved = $is_approved;
         $this->registered_at = $registered_at;
@@ -81,6 +129,17 @@ class PatientModel
             'hbpressure' => $this->hbpressure,
             'asthma' => $this->asthma,
             'do_operation' => $this->do_operation,
+            'fever' => $this->fever,
+            'cough' => $this->cough,
+            'shortness_breath' => $this->shortness_breath,
+            'fatique' => $this->fatique,
+            'body_aches' => $this->body_aches,
+            'loss_taste' => $this->loss_taste,
+            'sore_throats' => $this->sore_throats,
+            'diarrhea' => $this->diarrhea,
+            'nausea_vomitting' => $this->nausea_vomitting,
+            'day_sick' => $this->day_sick,
+            'heart_diseases' => $this->heart_diseases,
             'other_diseases' => $this->other_diseases,
             'is_approved' => $this->is_approved,
             'registered_at' => $this->registered_at
