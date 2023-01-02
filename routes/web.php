@@ -31,6 +31,7 @@ Route::middleware(['isAuth'])->group(function(){
     Route::get('/device', [DeviceController::class, 'index']);
     
     Route::prefix('/v2')->group(function(){
+        Route::post('/telegram/send', [API::class, 'sendTelegram']);
         Route::get('/fetchHeartbeat', [API::class, 'fetchHeartbeat']);
         Route::get('/wifi', [API::class, 'fetchWifi']);
         Route::get('/reset', [API::class, 'resetInfo']);

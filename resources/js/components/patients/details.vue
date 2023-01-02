@@ -225,10 +225,11 @@
                             </div>
                         </div>
                         <div class="col mb-3">
-                            <div class="col" align="right">
+                            <div class="col">
                                 <button v-if="!form_disabled" class="btn btn-primary" @click="save()">Save
                                     Changes</button>
                                 <button v-if="form_disabled" class="btn btn-warning" @click="monitor()">Monitor</button>
+                                <button v-if="form_disabled" class="btn btn-info" @click="message()">Message</button>
                                 <button v-if="form_disabled" class="btn btn-primary" @click="enable_edit()">Edit
                                     Patient</button>
                                 <button v-else class="btn btn-danger" @click="enable_edit()">
@@ -236,6 +237,39 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="!textbox_message.disabled" class="modal fade show" tabindex="-1" aria-hidden="false" style="display: block;"
+            aria-modal="true" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1">SECURE MESSAGE / NOTIFICATION</h5>
+                        <button type="button" class="btn-close" aria-label="Close" @click="message()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                Dear {{ patient.name }},<br/>
+                                <br/>
+                                <div class="form-group mb-3">
+                                    <textarea v-model="textbox_message.text" class="textarea form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <button class="btn btn-danger form-control" @click="use_tpl('positive')">POSITIVE</button>
+                            </div>
+                            <div class="col form-group">
+                                <button class="btn btn-success form-control" @click="use_tpl('negative')">NEGATIVE</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" @click="send_message()">Send</button>
                     </div>
                 </div>
             </div>
@@ -252,7 +286,11 @@ export default {
     data() {
         return {
             patient: [],
-            form_disabled: true
+            form_disabled: true,
+            textbox_message: {
+                text: '',
+                disabled: true
+            }
         }
     },
 
@@ -274,9 +312,48 @@ export default {
                 });
         },
 
+        use_tpl(result){
+            if(result == 'negative'){
+                this.textbox_message.text = "Congratulations, the results of your COVID-19 test came back negative. " +
+                "This means that you do not currently have COVID-19 and do not need to quarantine or take any other special precautions at this time.";
+            }
+
+            else if(result == 'positive'){
+                this.textbox_message.text = "I'm sorry to inform you that the results of your COVID-19 test came back positive. " +
+                "This means that you have COVID-19 and will need to quarantine for at least 10 days to prevent the spread of the virus to others. We will also need to monitor your symptoms and discuss any necessary treatment options with you.";
+            }
+        },
+
         enable_edit() {
             if (this.patient.id !== undefined) {
                 this.form_disabled = !this.form_disabled;
+            }
+        },
+
+        message() {
+            if(this.patient.id !== undefined){
+                this.textbox_message.disabled = !this.textbox_message.disabled;
+            }
+        },
+
+        send_message(){
+            let msg = confirm("Confirm want to send the message to this patient?");
+
+            if(msg){
+                axios.post('/v2/telegram/send', {
+                    name: this.patient.name,
+                    text: this.textbox_message.text,
+                    telegram_id: this.patient.telegram_id
+                })
+                .then((res) => {
+                    if(res.data.status){
+                        alert("Message has been sent successfully.");
+                        this.textbox_message.text = '';
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
             }
         },
 

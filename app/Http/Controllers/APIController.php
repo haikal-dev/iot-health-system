@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sensors;
+use App\Http\Controllers\TelegramController as TG;
 
 class APIController extends Controller
 {
@@ -14,6 +15,15 @@ class APIController extends Controller
             'success' => true,
             'sensors' => $data
         ];
+    }
+
+    public function sendTelegram(Request $request){
+        if($request->has('name', 'text', 'telegram_id')){
+            TG::reply($request->telegram_id, "[RESPONSE FROM DOCTOR]\n\nDear " . $request->name . ",\n\n" . $request->text)->send();
+            return [
+                'status' => true
+            ];
+        }
     }
 
     public function fetchTemperatureByPatient(Request $request, $patient_id){
