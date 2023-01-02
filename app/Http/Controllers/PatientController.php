@@ -40,6 +40,17 @@ class PatientController extends Controller
                     'hbpressure' => $request->hbpressure,
                     'asthma' => $request->asthma,
                     'do_operation' => $request->do_operation,
+                    'fever' => $request->fever,
+                    'cough' => $request->cough,
+                    'shortness_breath' => $request->shortness_breath,
+                    'fatique' => $request->fatique,
+                    'body_aches' => $request->body_aches,
+                    'loss_taste' => $request->loss_taste,
+                    'sore_throats' => $request->sore_throats,
+                    'diarrhea' => $request->diarrhea,
+                    'nausea_vomitting' => $request->nausea_vomitting,
+                    'day_sick' => $request->day_sick,
+                    'heart_diseases' => $request->heart_diseases,
                     'other_diseases' => $request->other_diseases
                 ]);
 

@@ -157,6 +157,17 @@ class PatientModel
             'hbpressure' => $data['hbpressure'],
             'asthma' => $data['asthma'],
             'do_operation' => $data['do_operation'],
+            'fever' => $data['fever'],
+            'cough' => $data['cough'],
+            'shortness_breath' => $data['shortness_breath'],
+            'fatique' => $data['fatique'],
+            'body_aches' => $data['body_aches'],
+            'loss_taste' => $data['loss_taste'],
+            'sore_throats' => $data['sore_throats'],
+            'diarrhea' => $data['diarrhea'],
+            'nausea_vomitting' => $data['nausea_vomitting'],
+            'day_sick' => $data['day_sick'],
+            'heart_diseases' => $data['heart_diseases'],
             'other_diseases' => $data['other_diseases']
         ]);
     }
