@@ -115,12 +115,119 @@
                                         </div>
                                     </div>
                                     <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Fever?</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.fever" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.fever" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Cough?</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.cough" value="Dry Cough" /> Dry Cough
+                                            <br />
+                                            <input type="radio" v-model="patient.cough" value="Cough With Mucus" /> Cough With Mucus
+                                            <br />
+                                            <input type="radio" v-model="patient.cough" value="Normal Cough" /> Normal Cough
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Shortness Of Breath?</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.shortness_breath" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.shortness_breath" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Fatique</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.fatique" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.fatique" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Body Aches</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.body_aches" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.body_aches" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Loss of Smell / Taste</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.loss_taste" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.loss_taste" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Sore Throats</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.sore_throats" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.sore_throats" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Diarrhea</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.diarrhea" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.diarrhea" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Nausea or Vomitting</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.nausea_vomitting" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.nausea_vomitting" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">How many days you have been sick?</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.day_sick" value="Less than 7 days" /> Less than 7 days
+                                            <br />
+                                            <input type="radio" v-model="patient.day_sick" value="More than 7 days" /> More than 7 days
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group mb-3">
+                                            <label for="">Heart Diseases</label>
+                                            <br />
+                                            <input type="radio" v-model="patient.heart_diseases" value="NO" /> No
+                                            <br />
+                                            <input type="radio" v-model="patient.heart_diseases" value="YES" /> Yes
+                                        </div>
+                                    </div>
+                                    <div class="col">
                                         <label for="">Other diseases</label>
                                         <textarea class="form-control" style="height: 100px;" v-model="patient.other_diseases" disabled></textarea>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -250,7 +357,6 @@ export default {
                         this.fetch_request_patients();
                         this.dialogBox();
                     }
-                    
                 })
                 .catch((err) => {
                     console.log(err);
