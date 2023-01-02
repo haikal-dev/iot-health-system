@@ -127,6 +127,8 @@
                                         <div class="form-group mb-3">
                                             <label for="">Cough?</label>
                                             <br />
+                                            <input type="radio" v-model="patient.cough" value="NO" /> No
+                                            <br />
                                             <input type="radio" v-model="patient.cough" value="Dry Cough" /> Dry Cough
                                             <br />
                                             <input type="radio" v-model="patient.cough" value="Cough With Mucus" /> Cough With Mucus

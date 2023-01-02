@@ -120,6 +120,8 @@
                                 <div class="form-group mb-3">
                                     <label for="">Cough?</label>
                                     <br />
+                                    <input :disabled="form_disabled" type="radio" v-model="patient.cough" value="NO" /> No
+                                    <br />
                                     <input :disabled="form_disabled" type="radio" v-model="patient.cough" value="Dry Cough" /> Dry Cough
                                     <br />
                                     <input :disabled="form_disabled" type="radio" v-model="patient.cough" value="Cough With Mucus" /> Cough With
