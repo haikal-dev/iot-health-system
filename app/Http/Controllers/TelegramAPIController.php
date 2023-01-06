@@ -18,7 +18,8 @@ class TelegramAPIController
 		$request = file_get_contents('php://input');
 		$request = json_decode($request, TRUE);
 
-		$data = ['userid' => '495913082', 'message' => '404'];
+		// CHANGE THIS DATA
+		$data = ['userid' => 'USER_ID', 'message' => '404'];
 
 		if(isset($request['message'])){
 			//$fh = fopen("logtg.txt", "a");
