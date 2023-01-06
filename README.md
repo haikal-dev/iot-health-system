@@ -9,10 +9,10 @@
 - First, clone this repo in CLI:
 
 ```
-git clone https://github.com/haikal-dev/laravel.git
+git clone https://github.com/haikal-dev/iot-health-system.git iot-project
 ```
 
-- Go to 'laravel' directory
+- Go to 'iot-project' directory
 
 - Copy '.env.example' & paste as '.env' in same directory
 
@@ -35,7 +35,3 @@ php artisan serve
 ```
 
 - Your staging server should be run on http://localhost:8000
-
-Your web app should appear like this:
-
-![localhost:8000](https://github.com/haikal-dev/laravel/blob/master/deploy.jpg?raw=true)
