@@ -28,6 +28,10 @@ composer update
 php artisan key:generate
 ```
 
+- Import SQL file to your MySQL Server Database
+
+- Edit your Telegram ID and Telegram Bot Secret Key in your .env file
+
 - Last, deploy staging server using CLI: 
 
 ```
