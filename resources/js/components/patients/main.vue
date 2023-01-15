@@ -332,12 +332,44 @@ export default {
                     // console.log(res);
                     if (res.data.status) {
                         this.patient = res.data.patient;
+                        this.updateAge();
                         this.dialogBox();
                     }
                 })
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+
+        updateAge(){
+            let date = new Date();
+            let current_year = date.getFullYear();
+
+            let pattern = "\\d{6}\\d{2}\\d{4}$";
+            let result = this.patient.ic_no.match(pattern);
+            if(result == null || this.patient.ic_no.length > 12){
+                this.patient.age = 0;
+                return;
+            }
+
+            let pattern_age = /^(\d{1,2})/;
+            let result_age = this.patient.ic_no.match(pattern_age);
+            let year = 0;
+            let age = 0;
+
+            let limiter = Math.ceil(current_year.toString().match(/\d{2}$/)[0]);
+
+            if(result_age[0] > limiter){
+                year = 1900 + Math.ceil(result_age[0]);
+                age = current_year - year;
+            }
+
+            else {
+                year = 2000 + Math.ceil(result_age[0]);
+                age = current_year - year;
+            }
+
+            this.patient.age = age;
         },
 
         dialogBox() {
