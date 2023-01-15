@@ -237,7 +237,6 @@ export default {
                 axios.post('/register', {
                     name: this.form.name,
                     telegram_id: this.form.telegram_id,
-                    age: this.form.age,
                     ic_no: this.form.ic,
                     hp_no: this.form.mobileNo,
                     address: this.form.address,

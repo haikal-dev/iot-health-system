@@ -32,7 +32,6 @@ class PatientController extends Controller
                 $model->update($id, [
                     'name' => $request->name,
                     'telegram_id' => $request->telegram_id,
-                    'age' => $request->age,
                     'ic_no' => $request->ic_no,
                     'hp_no' => $request->hp_no,
                     'address' => $request->address,
@@ -130,7 +129,6 @@ class PatientController extends Controller
         $model = new PatientModel(
             $request->name,
             $request->telegram_id,
-            $request->age,
             $request->ic_no,
             $request->hp_no,
             $request->address,
