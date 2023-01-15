@@ -110,11 +110,12 @@ class ESP32Controller extends Controller
                             }
 
                             if($hr_state){
-                                TG::reply($data->telegram_id, 'HR: ' . $hr . ' (Target: ' . $min_target_hr . ' - ' . $max_target_hr . ')')->send();
+                                // TG::reply($data->telegram_id, 'HR: ' . $hr . ' (Target: ' . $min_target_hr . ' - ' . $max_target_hr . ')')->send();
+                                Sensors::Patient($patient->id)->heartbeat()->save($hr, $spo);
+                                TG::reply($patient->telegram_id, "Heartbeat Rate: " . $hr . "\nSPO2: " . $spo)->send();
                             }
 
-                            // Sensors::Patient($patient->id)->heartbeat()->save($hr, $spo);
-                            // TG::reply($patient->telegram_id, "Heartbeat Rate: " . $hr . "\nSPO2: " . $spo)->send();
+                            
                         }
                     }
                 }
