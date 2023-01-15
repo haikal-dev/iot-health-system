@@ -183,7 +183,7 @@ export default {
 
             let pattern = "\\d{6}\\d{2}\\d{4}$";
             let result = this.form.ic.match(pattern);
-            if(result == null){
+            if(result == null || this.form.ic.length > 12){
                 alert("Identity Card is invalid!");
                 return;
             }
