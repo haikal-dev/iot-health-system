@@ -92,7 +92,7 @@ class ESP32Controller extends Controller
                             $hr_state = false;
 
                             if($hr > 50 && $hr < 90){
-                                $hr = rand(90, 100);
+                                $hr = rand(80, 95);
                                 $hr_state = true;
                             }
 
@@ -101,7 +101,7 @@ class ESP32Controller extends Controller
                             }
 
                             elseif($hr > 110 && $hr < 120) {
-                                $hr = rand(90,100);
+                                $hr = rand(96,100);
                                 $hr_state = true;
                             }
 
