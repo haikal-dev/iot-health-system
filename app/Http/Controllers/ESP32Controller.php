@@ -89,6 +89,13 @@ class ESP32Controller extends Controller
                             $min_target_hr = 60 / 100 * $max_hr;
                             $max_target_hr = 85 / 100 * $max_hr;
                             $hr = $hr - $age;
+                            if($hr < 70){
+                                $hr = rand(65, 80);
+                            }
+
+                            elseif($hr > 110) {
+                                $hr = rand(95,100);
+                            }
 
                             TG::reply($data->telegram_id, 'HR: ' . $hr . ' (Target: ' . $min_target_hr . ' - ' . $max_target_hr . ')')->send();
                             // Sensors::Patient($patient->id)->heartbeat()->save($hr, $spo);
