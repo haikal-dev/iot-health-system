@@ -36,7 +36,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Identity Card No.</label>
-                                    <input :disabled="form_disabled" class="form-control" type="number"
+                                    <input :disabled="form_disabled" @change="verifyIC()" class="form-control" type="number"
                                         v-model="patient.ic_no" />
                                 </div>
                             </div>
@@ -292,7 +292,8 @@ export default {
             textbox_message: {
                 text: '',
                 disabled: true
-            }
+            },
+            ic_verified: false
         }
     },
 
@@ -307,6 +308,7 @@ export default {
                     if (res.data.status) {
                         // console.log(res.data.patient);
                         this.patient = res.data.patient;
+                        this.updateAge();
                     }
                 })
                 .catch((err) => {
@@ -338,6 +340,76 @@ export default {
             }
         },
 
+        verifyIC(){
+            let date = new Date();
+            let current_year = date.getFullYear();
+
+            let pattern = "\\d{6}\\d{2}\\d{4}$";
+            let result = this.patient.ic_no.match(pattern);
+            if(result == null || this.patient.ic_no.length > 12){
+                this.patient.age = 0;
+                alert("Identity Card No. was not valid!");
+                console.log(result);
+                this.ic_verified = false;
+                return;
+            }
+
+            let pattern_age = /^(\d{1,2})/;
+            let result_age = this.patient.ic_no.match(pattern_age);
+            let year = 0;
+            let age = 0;
+
+            let limiter = Math.ceil(current_year.toString().match(/\d{2}$/)[0]);
+
+            if(result_age[0] > limiter){
+                year = 1900 + Math.ceil(result_age[0]);
+                age = current_year - year;
+            }
+
+            else {
+                year = 2000 + Math.ceil(result_age[0]);
+                age = current_year - year;
+            }
+
+            this.patient.age = age;
+
+            console.log('age changed: ' + this.patient.age);
+            this.ic_verified = true;
+        },
+
+        updateAge(){
+            let date = new Date();
+            let current_year = date.getFullYear();
+
+            let pattern = "\\d{6}\\d{2}\\d{4}$";
+            let result = this.patient.ic_no.match(pattern);
+            if(result == null || this.patient.ic_no.length > 12){
+                this.patient.age = 0;
+                this.ic_verified = false;
+                return;
+            }
+
+            let pattern_age = /^(\d{1,2})/;
+            let result_age = this.patient.ic_no.match(pattern_age);
+            let year = 0;
+            let age = 0;
+
+            let limiter = Math.ceil(current_year.toString().match(/\d{2}$/)[0]);
+
+            if(result_age[0] > limiter){
+                year = 1900 + Math.ceil(result_age[0]);
+                age = current_year - year;
+            }
+
+            else {
+                year = 2000 + Math.ceil(result_age[0]);
+                age = current_year - year;
+            }
+
+            this.patient.age = age;
+            this.ic_verified = true;
+        },
+
         send_message(){
             let msg = confirm("Confirm want to send the message to this patient?");
 
@@ -366,7 +438,8 @@ export default {
         },
 
         save() {
-            axios.put('/v2/patient/id/' + this.patient.id, {
+            if(this.ic_verified){
+                axios.put('/v2/patient/id/' + this.patient.id, {
                 api: 'update',
                 name: this.patient.name,
                 telegram_id: this.patient.telegram_id,
@@ -400,6 +473,11 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
+            }
+
+            else {
+                alert("Identity card no. was not valid!");
+            }
         }
     }
 }
