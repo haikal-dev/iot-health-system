@@ -85,17 +85,15 @@ class ESP32Controller extends Controller
                         }
 
                         else {
-                            if($hr > 120) {
-                                $hr = 120 - $age; 
-                            }
+                            $max_hr = 220 - $age;
+                            $min_target_hr = 60 / 100 * $max_hr;
+                            $max_target_hr = 85 / 100 * $max_hr;
+                            $hr = $hr - $age;
 
-                            else {
-                                $hr = $hr - $age;
-                            }
-                            TG::reply($data->telegram_id, 'HR: ' . $hr)->send();
+                            TG::reply($data->telegram_id, 'HR: ' . $hr . ' (Target: ' . $min_target_hr . ' - ' . $max_target_hr . ')')->send();
+                            // Sensors::Patient($patient->id)->heartbeat()->save($hr, $spo);
+                            // TG::reply($patient->telegram_id, "Heartbeat Rate: " . $hr . "\nSPO2: " . $spo)->send();
                         }
-                        // Sensors::Patient($patient->id)->heartbeat()->save($hr, $spo);
-                        // TG::reply($patient->telegram_id, "Heartbeat Rate: " . $hr . "\nSPO2: " . $spo)->send();
                     }
                 }
             }
