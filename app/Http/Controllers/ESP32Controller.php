@@ -97,7 +97,7 @@ class ESP32Controller extends Controller
                             }
 
                             elseif($hr > 0 && $hr < 51){
-                                TG::reply($data->telegram_id, 'Error hardware reading! Please make sure to put your finger correctly.');
+                                TG::reply($data->telegram_id, 'Error hardware reading! Please make sure to put your finger correctly.')->send();
                             }
 
                             elseif($hr > 110 && $hr < 120) {
@@ -106,7 +106,7 @@ class ESP32Controller extends Controller
                             }
 
                             elseif($hr > 150){
-                                TG::reply($data->telegram_id, 'Error hardware reading! Please make sure to put your finger correctly.');
+                                TG::reply($data->telegram_id, 'Error hardware reading! Please make sure to put your finger correctly.')->send();
                             }
 
                             if($hr_state){
