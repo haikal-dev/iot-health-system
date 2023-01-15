@@ -193,7 +193,9 @@ export default {
             let year = 0;
             let age = 0;
 
-            if(result_age[0] > 23){
+            let limiter = Math.ceil(current_year.toString().match(/\d{2}$/)[0]);
+
+            if(result_age[0] > limiter){
                 year = 1900 + Math.ceil(result_age[0]);
                 age = current_year - year;
             }
