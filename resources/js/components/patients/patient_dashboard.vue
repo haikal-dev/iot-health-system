@@ -386,7 +386,7 @@ export default {
                             }
                         ]);
                         // console.log('chart updated!');
-                    }, 1000);
+                    }, 3000);
                 }
             });
         }
