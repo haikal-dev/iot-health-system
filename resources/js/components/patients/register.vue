@@ -9,12 +9,12 @@
                 <input class="form-control" type="text" v-model="form.name" placeholder="Mohd Ali Bin Abu" />
             </div>
             <div class="form-group mb-3">
-                <label for="">Age</label>
-                <input class="form-control" type="number" v-model="form.age" placeholder="36" />
+                <label for="">Identity Card No.</label>
+                <input class="form-control" @change="updateAge()" type="number" v-model="form.ic" placeholder="850908027893" />
             </div>
             <div class="form-group mb-3">
-                <label for="">Identification No.</label>
-                <input class="form-control" type="number" v-model="form.ic" placeholder="850908027893" />
+                <label for="">Age</label>
+                <input class="form-control" type="number" v-model="form.age" placeholder="0" disabled />
             </div>
             <div class="form-group mb-3">
                 <label for="">Mobile No.</label>
@@ -177,11 +177,38 @@ export default {
     },
 
     methods: {
+        updateAge(){
+            let date = new Date();
+            let current_year = date.getFullYear();
+
+            let pattern = "\\d{6}\\d{2}\\d{4}$";
+            let result = this.form.ic.match(pattern);
+            if(result == null){
+                alert("Identity Card is invalid!");
+                return;
+            }
+
+            let pattern_age = /^(\d{1,2})/;
+            let result_age = this.form.ic.match(pattern_age);
+            let year = 0;
+            let age = 0;
+
+            if(result_age[0] > 23){
+                year = 1900 + Math.ceil(result_age[0]);
+                age = current_year - year;
+            }
+
+            else {
+                year = 2000 + Math.ceil(result_age[0]);
+                age = current_year - year;
+            }
+
+            this.form.age = age;
+        },
         register() {
             if (
                 this.form.name == '' ||
                 this.form.telegram_id == '' ||
-                this.form.age == '' ||
                 this.form.ic == '' ||
                 this.form.mobileNo == '' ||
                 this.form.address == '' ||
