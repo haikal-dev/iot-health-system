@@ -29,7 +29,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Age</label>
-                                    <input :disabled="form_disabled" class="form-control" type="number"
+                                    <input disabled class="form-control" type="number"
                                         v-model="patient.age" />
                                 </div>
                             </div>
@@ -443,7 +443,6 @@ export default {
                 api: 'update',
                 name: this.patient.name,
                 telegram_id: this.patient.telegram_id,
-                age: this.patient.age,
                 ic_no: this.patient.ic_no,
                 hp_no: this.patient.hp_no,
                 address: this.patient.address,
