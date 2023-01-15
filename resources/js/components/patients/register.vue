@@ -18,7 +18,7 @@
             </div>
             <div class="form-group mb-3">
                 <label for="">Mobile No.</label>
-                <input class="form-control" type="number" v-model="form.mobileNo" placeholder="850908027893" />
+                <input class="form-control" type="number" v-model="form.mobileNo" placeholder="01234567890" />
             </div>
             <div class="form-group mb-3">
                 <label for="">Telegram ID</label>
