@@ -207,6 +207,32 @@ class PatientModel
         return DB::table($this->table)->where('id', $id)->first();
     }
 
+    public function get_age($ic_no){
+        if(strlen($ic_no) == 12){
+            $current_year = gmdate('Y', time());
+            $age = 0;
+    
+            preg_match('/^\d{2}/', $ic_no, $matches);
+            preg_match('/\d{2}$/', $current_year, $limiter);
+    
+            if($matches[0] > $limiter[0]){
+                $year = 1900 + $matches[0];    
+                $age = $current_year - $year;
+            }
+    
+            else {
+                $year = 2000 + $matches[0];
+                $age = $current_year - $year;
+            }
+
+            return $age;
+        }
+
+        else {
+            return 0;
+        }
+    }
+
     public function serialize($data){
         $k = [];
         foreach($data as $arr){

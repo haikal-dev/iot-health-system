@@ -77,9 +77,25 @@ class ESP32Controller extends Controller
                     }
 
                     else {
-                        $patient = $patient->get_one($device->get_pairing_id());
-                        Sensors::Patient($patient->id)->heartbeat()->save($hr, $spo);
-                        TG::reply($patient->telegram_id, "Heartbeat Rate: " . $hr . "\nSPO2: " . $spo)->send();
+                        $data = $patient->get_one($device->get_pairing_id());
+                        $age = $patient->get_age($data->ic_no);
+
+                        if($age == 0){
+                            TG::reply($data->telegram_id, 'Identity Card number was invalid. Please ask administrator to update your identity card number in dashboard!')->send();
+                        }
+
+                        else {
+                            if($hr > 120) {
+                                $hr = 120 - $age; 
+                            }
+
+                            else {
+                                $hr = $hr - $age;
+                            }
+                            TG::reply($data->telegram_id, 'HR: ' . $hr)->send();
+                        }
+                        // Sensors::Patient($patient->id)->heartbeat()->save($hr, $spo);
+                        // TG::reply($patient->telegram_id, "Heartbeat Rate: " . $hr . "\nSPO2: " . $spo)->send();
                     }
                 }
             }
