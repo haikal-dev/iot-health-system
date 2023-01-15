@@ -30,7 +30,7 @@
                                 <div class="form-group">
                                     <label for="">Age</label>
                                     <input disabled class="form-control" type="number"
-                                        v-model="patient.age" />
+                                        v-model="form.age" />
                                 </div>
                             </div>
                             <div class="col">
@@ -288,6 +288,9 @@ export default {
     data() {
         return {
             patient: [],
+            form: {
+                age: 0
+            },
             form_disabled: true,
             textbox_message: {
                 text: '',
@@ -347,9 +350,8 @@ export default {
             let pattern = "\\d{6}\\d{2}\\d{4}$";
             let result = this.patient.ic_no.match(pattern);
             if(result == null || this.patient.ic_no.length > 12){
-                this.patient.age = 0;
+                this.form.age = 0;
                 alert("Identity Card No. was not valid!");
-                console.log(result);
                 this.ic_verified = false;
                 return;
             }
@@ -371,9 +373,7 @@ export default {
                 age = current_year - year;
             }
 
-            this.patient.age = age;
-
-            console.log('age changed: ' + this.patient.age);
+            this.form.age = age;
             this.ic_verified = true;
         },
 
@@ -384,7 +384,7 @@ export default {
             let pattern = "\\d{6}\\d{2}\\d{4}$";
             let result = this.patient.ic_no.match(pattern);
             if(result == null || this.patient.ic_no.length > 12){
-                this.patient.age = 0;
+                this.form.age = 0;
                 this.ic_verified = false;
                 return;
             }
@@ -406,7 +406,7 @@ export default {
                 age = current_year - year;
             }
 
-            this.patient.age = age;
+            this.form.age = age;
             this.ic_verified = true;
         },
 
